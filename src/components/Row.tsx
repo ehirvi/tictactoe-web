@@ -1,19 +1,14 @@
 import Square from "./Square";
+import "../styles/components/Row.css";
 
 const Row = () => {
   return (
-    <div style={rowStyle}>
+    <div id="row">
       <Square />
       <Square />
       <Square />
     </div>
   );
-};
-
-const rowStyle: React.CSSProperties = {
-  display: "flex",
-  flexDirection: "row",
-  gap: 10,
 };
 
 export default Row;

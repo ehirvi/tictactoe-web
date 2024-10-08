@@ -1,19 +1,14 @@
 import Row from "./Row";
+import "../styles/components/Grid.css";
 
 const Grid = () => {
   return (
-    <div style={gridStyle}>
+    <div id="grid">
       <Row />
       <Row />
       <Row />
     </div>
   );
-};
-
-const gridStyle: React.CSSProperties = {
-  display: "flex",
-  flexDirection: "column",
-  gap: 10,
 };
 
 export default Grid;

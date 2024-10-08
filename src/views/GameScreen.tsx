@@ -1,17 +1,12 @@
 import Grid from "../components/Grid";
+import "../styles/views/GameScreen.css";
 
 const GameScreen = () => {
   return (
-    <div style={gameScreenStyle}>
+    <div id="game-screen">
       <Grid />
     </div>
   );
-};
-
-const gameScreenStyle: React.CSSProperties = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
 };
 
 export default GameScreen;
