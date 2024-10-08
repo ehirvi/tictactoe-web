@@ -1,21 +1,22 @@
-import { useState } from "react";
 import "../styles/components/Square.css";
 
-const Square = () => {
-  const [isPressed, setIsPressed] = useState(false);
-  const [value, setValue] = useState<string>();
+interface Props {
+  value: string | undefined;
+  position: number;
+  makeMove: (index: number) => void;
+}
 
+const Square = ({ value, position, makeMove }: Props) => {
   const handleClick = () => {
-    if (!isPressed) {
+    if (!value) {
       console.log("click");
-      setIsPressed(true);
-      setValue("X");
+      makeMove(position);
     }
   };
 
   return (
     <button id="square" onClick={handleClick}>
-      {value}
+      {value && value}
     </button>
   );
 };
