@@ -2,7 +2,7 @@ import Square from "./Square";
 import "../styles/components/Row.css";
 
 interface Props {
-  values: (string | undefined)[];
+  values: (string | null)[];
   positions: number[];
   makeMove: (index: number) => void;
 }

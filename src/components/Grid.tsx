@@ -2,7 +2,7 @@ import Row from "./Row";
 import "../styles/components/Grid.css";
 
 interface Props {
-  board: (string | undefined)[];
+  board: (string | null)[];
   makeMove: (index: number) => void;
 }
 

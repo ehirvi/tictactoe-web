@@ -1,7 +1,7 @@
 import "../styles/components/Square.css";
 
 interface Props {
-  value: string | undefined;
+  value: string | null;
   position: number;
   makeMove: (index: number) => void;
 }
@@ -16,7 +16,7 @@ const Square = ({ value, position, makeMove }: Props) => {
 
   return (
     <button id="square" onClick={handleClick}>
-      {value && value}
+      {value}
     </button>
   );
 };
