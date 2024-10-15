@@ -38,11 +38,13 @@ const useGameServer = () => {
     // setBoard(updatedBoard);
     ws.send(
       JSON.stringify({
-        player_movement: {
-          player_id: playerId,
-          game_board: board,
-          index,
+        type: "PlayerMovement",
+        player: {
+          id: playerId,
+          host: true,
         },
+        game_board: board,
+        index,
       })
     );
   };
