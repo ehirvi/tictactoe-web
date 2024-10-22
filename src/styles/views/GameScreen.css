@@ -4,3 +4,11 @@
     align-items: center;
     flex-direction: column;
 }
+
+#reset-button {
+    background-color: lightskyblue;
+
+    &:hover {
+        background-color: rgb(77, 126, 156);
+    }
+}

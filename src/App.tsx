@@ -1,9 +1,18 @@
+import { useState } from "react";
 import GameScreen from "./views/GameScreen";
+import HomeScreen from "./views/HomeScreen";
 
 const App = () => {
+  const [gameStarted, setGameStarted] = useState(false);
+
+  const startGameSession = () => {
+    setGameStarted(true);
+  };
+
   return (
     <>
-      <GameScreen />
+      {!gameStarted && <HomeScreen startGameSession={startGameSession} />}
+      {gameStarted && <GameScreen />}
     </>
   );
 };

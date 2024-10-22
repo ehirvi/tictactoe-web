@@ -1,7 +1,6 @@
-#button {
+.button {
     border: solid;
     border-radius: 10px;
-    background-color: lightskyblue;
     font-family: monospace;
     font-size: 30px;
     margin: 20px;
@@ -10,8 +9,8 @@
     padding-top: 2px;
     padding-bottom: 2px;
     cursor: pointer;
+
     &:hover {
         transition: 0.2s;
-        background-color: rgb(77, 126, 156);
     }
 }

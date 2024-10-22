@@ -32,7 +32,7 @@ const useGameServer = () => {
     }
   });
 
-  const handlePlayerMove = (index: number) => {
+  const handlePlayerMove = (position: number) => {
     // const updatedBoard = [...board];
     // updatedBoard[index] = "X";
     // setBoard(updatedBoard);
@@ -41,10 +41,9 @@ const useGameServer = () => {
         type: "PlayerMovement",
         player: {
           id: playerId,
-          host: true,
+          role: "Host",
         },
-        game_board: board,
-        index,
+        position,
       })
     );
   };

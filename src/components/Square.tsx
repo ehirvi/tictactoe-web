@@ -3,7 +3,7 @@ import "../styles/components/Square.css";
 interface Props {
   value: string | null;
   position: number;
-  makeMove: (index: number) => void;
+  makeMove: (position: number) => void;
 }
 
 const Square = ({ value, position, makeMove }: Props) => {

@@ -4,7 +4,7 @@ import "../styles/components/Row.css";
 interface Props {
   values: (string | null)[];
   positions: number[];
-  makeMove: (index: number) => void;
+  makeMove: (position: number) => void;
 }
 
 const Row = ({ values, positions, makeMove }: Props) => {

@@ -1,5 +1,3 @@
-// import { useState } from "react";
-import Button from "../components/Button";
 import Grid from "../components/Grid";
 import "../styles/views/GameScreen.css";
 import useGameServer from "../hooks/useGameServer";
@@ -15,7 +13,9 @@ const GameScreen = () => {
   return (
     <div id="game-screen">
       <Grid board={board} makeMove={handlePlayerMove} />
-      <Button text="Reset" eventHandler={resetBoard} />
+      <button className="button" id="reset-button" onClick={resetBoard}>
+        Reset
+      </button>
     </div>
   );
 };

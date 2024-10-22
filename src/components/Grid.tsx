@@ -3,7 +3,7 @@ import "../styles/components/Grid.css";
 
 interface Props {
   board: (string | null)[];
-  makeMove: (index: number) => void;
+  makeMove: (position: number) => void;
 }
 
 const Grid = ({ board, makeMove }: Props) => {
