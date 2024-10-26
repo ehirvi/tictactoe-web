@@ -1,10 +1,9 @@
-import { gameBoardSchema } from "./schemas";
-import { GameBoard } from "./types";
+import { gameEventSchema } from "./schemas";
 
 export const parseMessage = (data: unknown) => {
   try {
-    const gameBoard = gameBoardSchema.parse(data);
-    return gameBoard as GameBoard;
+    const gameEvent = gameEventSchema.parse(data);
+    return gameEvent;
   } catch (error: unknown) {
     console.error(error);
   }

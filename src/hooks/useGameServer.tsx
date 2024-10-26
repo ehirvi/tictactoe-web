@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { v4 as uuid } from "uuid";
 import { parseMessage } from "../utils/parsers";
 import { GameBoard } from "../utils/types";
 import webSocket from "../services/webSocket";
@@ -25,9 +24,7 @@ const useGameServer = () => {
   useEffect(() => {
     const joinSession = () => {
       const ws = webSocket.createWebSocket();
-      const id = uuid();
       setSocket(ws);
-      setPlayerId(id);
     };
     joinSession();
   }, []);
@@ -39,9 +36,20 @@ const useGameServer = () => {
 
     socket.addEventListener("message", (ev: MessageEvent<string>) => {
       const message: unknown = JSON.parse(ev.data);
-      const gameBoard = parseMessage(message);
-      if (gameBoard) {
-        setBoard(gameBoard);
+      const gameEvent = parseMessage(message);
+      if (gameEvent) {
+        switch (gameEvent.type) {
+          case "GameBoard":
+            setBoard(gameEvent.game_board);
+            break;
+          case "PlayerJoin":
+            setPlayerId(gameEvent.player_id);
+            break;
+          default: {
+            const _exhaustiveCheck: never = gameEvent;
+            return _exhaustiveCheck;
+          }
+        }
       }
     });
   }
