@@ -14,4 +14,4 @@ export interface PlayerJoinEvent {
   player_id: string;
 }
 
-export type GameEvent = GameBoardEvent | PlayerJoinEvent;
+export type ClientEvent = GameBoardEvent | PlayerJoinEvent;

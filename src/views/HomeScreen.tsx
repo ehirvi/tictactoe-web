@@ -5,10 +5,10 @@ import gameService from "../services/gameService";
 
 interface Props {
   startGame: () => void;
+  setGameId: (id: string) => void;
 }
 
-const HomeScreen = ({ startGame }: Props) => {
-  const [gameId, setGameId] = useState<string>();
+const HomeScreen = ({ startGame, setGameId }: Props) => {
   const [startNewGame, setStartNewGame] = useState(false);
 
   useEffect(() => {
@@ -21,12 +21,11 @@ const HomeScreen = ({ startGame }: Props) => {
       }
     };
     void initiateSession();
-  }, [startNewGame, startGame]);
+  }, [startNewGame, startGame, setGameId]);
 
   return (
     <div id="home-screen">
       <h1>Tic-Tac-Toe</h1>
-      <p>{gameId}</p>
       <button
         className="button"
         id="new-game-button"

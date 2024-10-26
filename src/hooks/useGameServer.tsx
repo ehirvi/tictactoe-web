@@ -6,7 +6,7 @@ import webSocket from "../services/webSocket";
 /**
  * Handles the connection to the game server and returns an up to date game board and a function to make a move
  */
-const useGameServer = () => {
+const useGameServer = (gameId: string) => {
   const [socket, setSocket] = useState<WebSocket>();
   const [playerId, setPlayerId] = useState<string>();
   const [board, setBoard] = useState<GameBoard>([
@@ -23,11 +23,11 @@ const useGameServer = () => {
 
   useEffect(() => {
     const joinSession = () => {
-      const ws = webSocket.createWebSocket();
+      const ws = webSocket.createWebSocket(gameId);
       setSocket(ws);
     };
     joinSession();
-  }, []);
+  }, [gameId]);
 
   if (socket) {
     socket.addEventListener("open", () => {
@@ -59,6 +59,7 @@ const useGameServer = () => {
       socket.send(
         JSON.stringify({
           type: "PlayerMove",
+          game_id: gameId,
           player: {
             id: playerId,
             role: "Host",
