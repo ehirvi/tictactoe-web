@@ -1,8 +1,9 @@
 import Square from "./Square";
 import "../styles/components/Row.css";
+import { GameBoard } from "../utils/types";
 
 interface Props {
-  values: (string | null)[];
+  values: GameBoard;
   positions: number[];
   makeMove: (position: number) => void;
 }

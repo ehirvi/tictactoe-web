@@ -5,15 +5,12 @@ import HomeScreen from "./views/HomeScreen";
 const App = () => {
   const [gameStarted, setGameStarted] = useState(false);
 
-  const startGameSession = () => {
+  const startGame = () => {
     setGameStarted(true);
   };
 
   return (
-    <>
-      {!gameStarted && <HomeScreen startGameSession={startGameSession} />}
-      {gameStarted && <GameScreen />}
-    </>
+    <>{gameStarted ? <GameScreen /> : <HomeScreen startGame={startGame} />}</>
   );
 };
 

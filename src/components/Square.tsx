@@ -1,7 +1,8 @@
 import "../styles/components/Square.css";
+import { PlayerMark } from "../utils/types";
 
 interface Props {
-  value: string | null;
+  value: PlayerMark | null;
   position: number;
   makeMove: (position: number) => void;
 }
@@ -9,7 +10,6 @@ interface Props {
 const Square = ({ value, position, makeMove }: Props) => {
   const handleClick = () => {
     if (!value) {
-      console.log("click");
       makeMove(position);
     }
   };

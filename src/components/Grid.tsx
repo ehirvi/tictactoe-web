@@ -1,8 +1,9 @@
 import Row from "./Row";
 import "../styles/components/Grid.css";
+import { GameBoard } from "../utils/types";
 
 interface Props {
-  board: (string | null)[];
+  board: GameBoard;
   makeMove: (position: number) => void;
 }
 
