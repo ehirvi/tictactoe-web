@@ -10,8 +10,7 @@ const GameScreen = ({ gameId }: Props) => {
   const { board, setBoard, handlePlayerMove } = useGameServer(gameId);
 
   const resetBoard = () => {
-    const cleanBoard = board.map(() => null);
-    setBoard(cleanBoard);
+    setBoard((board) => board.map(() => null));
   };
 
   return (

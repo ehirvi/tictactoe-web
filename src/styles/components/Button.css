@@ -1,6 +1,5 @@
 .button {
-    border: solid;
-    border-radius: 10px;
+    border: solid 4px;
     font-family: monospace;
     font-size: 30px;
     margin: 20px;
@@ -9,6 +8,7 @@
     padding-top: 2px;
     padding-bottom: 2px;
     cursor: pointer;
+    box-shadow: 2px 2px 2px 0 purple, 3px 3px 3px 0 black;
 
     &:hover {
         transition: 0.2s;

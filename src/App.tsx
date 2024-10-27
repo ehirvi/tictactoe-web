@@ -3,19 +3,18 @@ import GameScreen from "./views/GameScreen";
 import HomeScreen from "./views/HomeScreen";
 
 const App = () => {
-  const [gameStarted, setGameStarted] = useState(false);
   const [gameId, setGameId] = useState<string>();
 
-  const startGame = () => {
-    setGameStarted(true);
+  const startGame = (id: string) => {
+    setGameId(id);
   };
 
   return (
     <>
-      {gameStarted ? (
-        <GameScreen gameId={gameId!} />
+      {gameId ? (
+        <GameScreen gameId={gameId} />
       ) : (
-        <HomeScreen startGame={startGame} setGameId={setGameId} />
+        <HomeScreen startGame={startGame} />
       )}
     </>
   );
