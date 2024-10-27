@@ -1,15 +1,27 @@
 import { useState } from "react";
 import "../styles/components/JoinForm.css";
+import gameService from "../services/gameService";
 
 interface Props {
   onCancel: () => void;
+  startGame: (id: string) => void;
 }
 
-const JoinForm = ({ onCancel }: Props) => {
+const JoinForm = ({ onCancel, startGame }: Props) => {
   const [gameId, setGameId] = useState("");
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
+    if (gameId.length !== 0) {
+      void joinGame(gameId);
+    }
+  };
+
+  const joinGame = async (id: string) => {
+    const successful = await gameService.joinSession(id);
+    if (successful) {
+      startGame(gameId);
+    }
   };
 
   return (

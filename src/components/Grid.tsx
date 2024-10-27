@@ -1,6 +1,7 @@
-import Row from "./Row";
+// import Row from "./Row";
 import "../styles/components/Grid.css";
 import { GameBoard } from "../utils/types";
+import Square from "./Square";
 
 interface Props {
   board: GameBoard;
@@ -10,21 +11,21 @@ interface Props {
 const Grid = ({ board, makeMove }: Props) => {
   return (
     <div id="grid">
-      <Row
-        values={board.slice(0, 3)}
-        positions={[0, 1, 2]}
-        makeMove={makeMove}
-      />
-      <Row
-        values={board.slice(3, 6)}
-        positions={[3, 4, 5]}
-        makeMove={makeMove}
-      />
-      <Row
-        values={board.slice(6, 9)}
-        positions={[6, 7, 8]}
-        makeMove={makeMove}
-      />
+      <div id="row">
+        <Square value={board[0]} position={0} makeMove={makeMove} />
+        <Square value={board[1]} position={1} makeMove={makeMove} />
+        <Square value={board[2]} position={2} makeMove={makeMove} />
+      </div>
+      <div id="row">
+        <Square value={board[3]} position={3} makeMove={makeMove} />
+        <Square value={board[4]} position={4} makeMove={makeMove} />
+        <Square value={board[5]} position={5} makeMove={makeMove} />
+      </div>
+      <div id="row">
+        <Square value={board[6]} position={6} makeMove={makeMove} />
+        <Square value={board[7]} position={7} makeMove={makeMove} />
+        <Square value={board[8]} position={8} makeMove={makeMove} />
+      </div>
     </div>
   );
 };

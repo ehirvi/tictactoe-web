@@ -8,7 +8,7 @@ interface Props {
   startGame: (id: string) => void;
 }
 
-const HomeScreen = ({ startGame, }: Props) => {
+const HomeScreen = ({ startGame }: Props) => {
   const [createNewGame, setCreateNewGame] = useState(false);
   const [joinGame, setJoinGame] = useState(false);
 
@@ -41,7 +41,7 @@ const HomeScreen = ({ startGame, }: Props) => {
         New Game
       </button>
       {joinGame ? (
-        <JoinForm onCancel={handleJoinForm} />
+        <JoinForm onCancel={handleJoinForm} startGame={startGame} />
       ) : (
         <button
           className="button"

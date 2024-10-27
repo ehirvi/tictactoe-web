@@ -7,20 +7,23 @@ interface Props {
 }
 
 const GameScreen = ({ gameId }: Props) => {
-  const { board, setBoard, handlePlayerMove } = useGameServer(gameId);
+  const { board, handlePlayerMove } = useGameServer(gameId);
 
-  const resetBoard = () => {
-    setBoard((board) => board.map(() => null));
-  };
+  // const resetBoard = () => {
+  //   setBoard((board) => board.map(() => null));
+  // };
 
-  return (
-    <div id="game-screen">
-      <Grid board={board} makeMove={handlePlayerMove} />
-      <button className="button" id="reset-button" onClick={resetBoard}>
-        Reset
-      </button>
-    </div>
-  );
+  if (board) {
+    return (
+      <div id="game-screen">
+        <Grid board={board} makeMove={handlePlayerMove} />
+        {/* <button className="button" id="reset-button" onClick={resetBoard}>
+          Reset
+        </button> */}
+        <p>Copy this ID to join the game: {gameId}</p>
+      </div>
+    );
+  }
 };
 
 export default GameScreen;

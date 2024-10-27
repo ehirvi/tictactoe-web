@@ -9,31 +9,17 @@ import webSocket from "../services/webSocket";
 const useGameServer = (gameId: string) => {
   const [socket, setSocket] = useState<WebSocket>();
   const [playerId, setPlayerId] = useState<string>();
-  const [board, setBoard] = useState<GameBoard>([
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-  ]);
+  const [board, setBoard] = useState<GameBoard>();
 
   useEffect(() => {
-    const joinSession = () => {
-      const ws = webSocket.createWebSocket(gameId);
-      setSocket(ws);
+    const ws = webSocket.createWebSocket(gameId);
+    setSocket(ws);
+    return () => {
+      ws.close();
     };
-    joinSession();
   }, [gameId]);
 
   if (socket) {
-    socket.addEventListener("open", () => {
-      // ws.send(`Player ${playerId} has connected`);
-    });
-
     socket.addEventListener("message", (ev: MessageEvent<string>) => {
       const message: unknown = JSON.parse(ev.data);
       const gameEvent = parseMessage(message);
@@ -62,7 +48,6 @@ const useGameServer = (gameId: string) => {
           game_id: gameId,
           player: {
             id: playerId,
-            role: "Host",
           },
           position,
         })
