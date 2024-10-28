@@ -20,7 +20,7 @@ const GameScreen = ({ gameId }: Props) => {
         {/* <button className="button" id="reset-button" onClick={resetBoard}>
           Reset
         </button> */}
-        <p>Copy this ID to join the game: {gameId}</p>
+        <p id="game-text">{gameId}</p>
       </div>
     );
   }
