@@ -6,6 +6,15 @@ An online version of the Tic-Tac-Toe game.
 
 Play a game of Tic-Tac-Toe with your friend remotely. Create a new game, send the invite code to them and they will use it to join your game session.
 
+## Preview
+
+> UI is a work in progress
+
+<img width=400 src="https://github.com/user-attachments/assets/501c7f4f-1399-4f00-88fa-56d63df7d74f"></img>
+<img width=400 src="https://github.com/user-attachments/assets/5041da39-5801-4481-9d19-fc5d7b3a61c3"></img>
+<img width=400 src="https://github.com/user-attachments/assets/65dec169-73fe-42e5-8d5e-58eb2b5d6a17"></img>
+
+
 ## Technologies Used
 
 - TypeScript
