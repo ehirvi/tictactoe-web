@@ -1,10 +1,13 @@
 # Tic-Tac-Toe (web client)
+
 An online version of the Tic-Tac-Toe game.
 
 ## Description
+
 Play a game of Tic-Tac-Toe with your friend remotely. Create a new game, send the invite code to them and they will use it to join your game session.
 
 ## Technologies Used
+
 - TypeScript
 - React
 - Node.js
@@ -12,15 +15,19 @@ Play a game of Tic-Tac-Toe with your friend remotely. Create a new game, send th
 - WebSocket
 
 ## Setup
+
 ### Requirements
+
 - [Node.js](https://nodejs.org/en)
 
 ### Installation
+
 1. Follow the instructions to run the [server](https://github.com/ehirvi/tictactoe-server) first
 2. Clone this repository and install its dependencies ```npm install```
 3. Run in development mode ```npm run dev```
 
 ## Feature Roadmap
+
 - [x] A basic user interface and a game board the player can interact with.
 - [x] The player can connect to the game server.
 - [x] Game server handles the players moves and sends an updated game board back to the player.
