@@ -4,8 +4,8 @@ export type PlayerRole = "Host" | "Guest";
 
 export type GameBoard = (PlayerMark | null)[];
 
-export interface GameBoardEvent {
-  type: "GameBoard";
+export interface GameBoardUpdateEvent {
+  type: "GameBoardUpdate";
   game_board: GameBoard;
   turn: PlayerRole;
 }
@@ -16,4 +16,4 @@ export interface PlayerJoinEvent {
   role: PlayerRole;
 }
 
-export type ClientEvent = GameBoardEvent | PlayerJoinEvent;
+export type ClientEvent = GameBoardUpdateEvent | PlayerJoinEvent;

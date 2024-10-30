@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { parseMessage } from "../utils/parsers";
-import { GameBoard, PlayerRole } from "../utils/types";
+import {
+  GameBoard,
+  GameBoardUpdateEvent,
+  PlayerJoinEvent,
+} from "../utils/types";
 import webSocket from "../services/webSocket";
 
 /**
@@ -9,8 +13,8 @@ import webSocket from "../services/webSocket";
 const useGameServer = (gameId: string) => {
   const [socket, setSocket] = useState<WebSocket>();
   const [playerId, setPlayerId] = useState<string>();
-  const [playerRole, setPlayerRole] = useState<PlayerRole>();
-  const [gameTurn, setGameTurn] = useState<PlayerRole>();
+  const [playerRole, setPlayerRole] = useState<PlayerJoinEvent["role"]>();
+  const [gameTurn, setGameTurn] = useState<GameBoardUpdateEvent["turn"]>();
   const [board, setBoard] = useState<GameBoard>();
 
   useEffect(() => {
