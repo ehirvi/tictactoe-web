@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { parseMessage } from "../utils/parsers";
-import { GameBoard } from "../utils/types";
+import { GameBoard, PlayerRole } from "../utils/types";
 import webSocket from "../services/webSocket";
 
 /**
@@ -9,6 +9,8 @@ import webSocket from "../services/webSocket";
 const useGameServer = (gameId: string) => {
   const [socket, setSocket] = useState<WebSocket>();
   const [playerId, setPlayerId] = useState<string>();
+  const [playerRole, setPlayerRole] = useState<PlayerRole>();
+  const [gameTurn, setGameTurn] = useState<PlayerRole>();
   const [board, setBoard] = useState<GameBoard>();
 
   useEffect(() => {
@@ -25,11 +27,13 @@ const useGameServer = (gameId: string) => {
       const gameEvent = parseMessage(message);
       if (gameEvent) {
         switch (gameEvent.type) {
-          case "GameBoard":
+          case "GameBoardUpdate":
             setBoard(gameEvent.game_board);
+            setGameTurn(gameEvent.turn);
             break;
           case "PlayerJoin":
             setPlayerId(gameEvent.player_id);
+            setPlayerRole(gameEvent.role);
             break;
           default: {
             const _exhaustiveCheck: never = gameEvent;
@@ -41,7 +45,7 @@ const useGameServer = (gameId: string) => {
   }
 
   const handlePlayerMove = (position: number) => {
-    if (socket) {
+    if (socket && playerRole === gameTurn) {
       socket.send(
         JSON.stringify({
           type: "PlayerMove",
@@ -55,7 +59,7 @@ const useGameServer = (gameId: string) => {
     }
   };
 
-  return { board, setBoard, handlePlayerMove };
+  return { board, handlePlayerMove };
 };
 
 export default useGameServer;
