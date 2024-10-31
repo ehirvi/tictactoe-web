@@ -4,7 +4,7 @@ An online version of the Tic-Tac-Toe game.
 
 ## Description
 
-Play a game of Tic-Tac-Toe with your friend remotely. Create a new game, send the invite code to them and they will use it to join your game session.
+Play a game of Tic-Tac-Toe with your friend remotely. Create a new game, send the invite code to your friend and they will use it to join your game session.
 
 ## Preview
 
@@ -42,7 +42,7 @@ Play a game of Tic-Tac-Toe with your friend remotely. Create a new game, send th
 - [x] A unique game ID is generated upon the first player starting a game session.
 - [x] A second player can join the game session of the first player using the game ID.
 - [x] Both players in the same session can set their mark (X or O) on the board with real time updates.
-- [ ] Game win/lose conditions are checked on the server to determine if a player has won and whether the game should be ended.
+- [x] Game win/lose conditions are checked on the server to determine if a player has won and whether the game should be ended.
 - [ ] Improved UI style.
 - [ ] Usage of Redis cache (or similar) to save ongoing game sessions, instead of using a map-like object.
 - [ ] Security/authorization via tokens.
