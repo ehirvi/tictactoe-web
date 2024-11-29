@@ -34,7 +34,7 @@ Play a game of Tic-Tac-Toe with your friend remotely. Create a new game, send th
 2. Clone this repository and install its dependencies ```npm install```
 3. Run in development mode ```npm run dev```
 
-## Feature Roadmap
+## Development Roadmap
 
 - [x] A basic user interface and a game board the player can interact with.
 - [x] The player can connect to the game server.
