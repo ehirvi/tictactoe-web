@@ -1,26 +1,31 @@
 import { useState } from "react";
 import "../styles/components/JoinForm.css";
 import gameService from "../services/gameService";
+import useGameSessionStore from "../store/useGameSessionStore";
 
 interface Props {
   onCancel: () => void;
-  startGame: (id: string) => void;
 }
 
-const JoinForm = ({ onCancel, startGame }: Props) => {
-  const [gameId, setGameId] = useState("");
+const JoinForm = ({ onCancel }: Props) => {
+  const setSessionId = useGameSessionStore((state) => state.setSessionId);
+  const setSessionStarted = useGameSessionStore(
+    (state) => state.setSessionStarted
+  );
+  const [idInput, setIdInput] = useState("");
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    if (gameId.length !== 0) {
-      void joinGame(gameId);
+    if (idInput.length > 0) {
+      void joinGame();
     }
   };
 
-  const joinGame = async (id: string) => {
-    const successful = await gameService.joinSession(id);
+  const joinGame = async () => {
+    const successful = await gameService.joinSession(idInput);
     if (successful) {
-      startGame(gameId);
+      setSessionId(idInput);
+      setSessionStarted(true);
     }
   };
 
@@ -31,8 +36,8 @@ const JoinForm = ({ onCancel, startGame }: Props) => {
           id="text-input"
           placeholder="Enter Game ID"
           type="text"
-          value={gameId}
-          onChange={({ target }) => setGameId(target.value)}
+          value={idInput}
+          onChange={({ target }) => setIdInput(target.value)}
         />
         <div id="form-buttons">
           <button

@@ -6,11 +6,13 @@ import {
   PlayerJoinEvent,
 } from "../utils/types";
 import webSocket from "../services/webSocket";
+import useGameSessionStore from "../store/useGameSessionStore";
 
 /**
  * Handles the connection to the game server and returns an up to date game board and a function to make a move
  */
-const useGameServer = (gameId: string) => {
+const useGameServer = () => {
+  const sessionId = useGameSessionStore((state) => state.sessionId);
   const [socket, setSocket] = useState<WebSocket>();
   const [playerId, setPlayerId] = useState<string>();
   const [playerRole, setPlayerRole] = useState<PlayerJoinEvent["role"]>();
@@ -18,12 +20,14 @@ const useGameServer = (gameId: string) => {
   const [board, setBoard] = useState<GameBoard>();
 
   useEffect(() => {
-    const ws = webSocket.createWebSocket(gameId);
-    setSocket(ws);
-    return () => {
-      ws.close();
-    };
-  }, [gameId]);
+    if (sessionId) {
+      const ws = webSocket.createWebSocket(sessionId);
+      setSocket(ws);
+      return () => {
+        ws.close();
+      };
+    }
+  }, [sessionId]);
 
   if (socket) {
     socket.addEventListener("message", (ev: MessageEvent<string>) => {
@@ -53,7 +57,7 @@ const useGameServer = (gameId: string) => {
       socket.send(
         JSON.stringify({
           type: "PlayerMove",
-          game_id: gameId,
+          game_id: sessionId,
           player: {
             id: playerId,
           },
@@ -63,7 +67,7 @@ const useGameServer = (gameId: string) => {
     }
   };
 
-  return { board, handlePlayerMove };
+  return { board, sessionId, handlePlayerMove };
 };
 
 export default useGameServer;

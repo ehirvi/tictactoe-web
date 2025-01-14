@@ -1,33 +1,29 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "../styles/components/Button.css";
 import "../styles/views/HomeScreen.css";
 import gameService from "../services/gameService";
 import JoinForm from "../components/JoinForm";
+import useGameSessionStore from "../store/useGameSessionStore";
 
-interface Props {
-  startGame: (id: string) => void;
-}
+const HomeScreen = () => {
+  const setSessionStarted = useGameSessionStore(
+    (state) => state.setSessionStarted
+  );
+  const setSessionId = useGameSessionStore((state) => state.setSessionId);
+  const [isJoinFormOpen, setJoinFormOpen] = useState(false);
 
-const HomeScreen = ({ startGame }: Props) => {
-  const [createNewGame, setCreateNewGame] = useState(false);
-  const [joinGame, setJoinGame] = useState(false);
+  const startSession = async () => {
+    const id = await gameService.createSession();
+    setSessionId(id);
+    setSessionStarted(true);
+  };
 
-  useEffect(() => {
-    const initiateSession = async () => {
-      if (createNewGame) {
-        const id = await gameService.createSession();
-        startGame(id);
-      }
-    };
-    void initiateSession();
-  }, [createNewGame, startGame]);
-
-  const handleCreateGame = () => {
-    setCreateNewGame(true);
+  const handleNewGameButton = () => {
+    void startSession();
   };
 
   const handleJoinForm = () => {
-    setJoinGame(!joinGame);
+    setJoinFormOpen(!isJoinFormOpen);
   };
 
   return (
@@ -36,12 +32,12 @@ const HomeScreen = ({ startGame }: Props) => {
       <button
         className="button"
         id="new-game-button"
-        onClick={handleCreateGame}
+        onClick={handleNewGameButton}
       >
         New Game
       </button>
-      {joinGame ? (
-        <JoinForm onCancel={handleJoinForm} startGame={startGame} />
+      {isJoinFormOpen ? (
+        <JoinForm onCancel={handleJoinForm} />
       ) : (
         <button
           className="button"

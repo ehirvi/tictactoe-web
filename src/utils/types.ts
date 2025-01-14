@@ -1,4 +1,4 @@
-type PlayerMark = "X" | "O";
+export type PlayerMark = "X" | "O";
 
 export type PlayerRole = "Host" | "Guest";
 
