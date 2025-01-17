@@ -1,7 +1,42 @@
 import { useState } from "react";
-import "../styles/components/JoinForm.css";
 import gameService from "../services/gameService";
 import useGameSessionStore from "../store/useGameSessionStore";
+import styled from "styled-components";
+import MenuButton from "./MenuButton";
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+`;
+
+const TextInput = styled.input`
+  border: solid 2px;
+  outline: solid 2px;
+  padding: 10px;
+  font-family: monospace;
+  font-size: 20px;
+`;
+
+const FormButtons = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const CancelButton = styled(MenuButton)`
+  background-color: rgb(221, 101, 101);
+
+  &:hover {
+    background-color: rgb(129, 58, 58);
+  }
+`;
+
+const JoinButton = styled(MenuButton)`
+  background-color: rgb(126, 216, 117);
+
+  &:hover {
+    background-color: rgb(65, 116, 60);
+  }
+`;
 
 interface Props {
   onCancel: () => void;
@@ -30,30 +65,20 @@ const JoinForm = ({ onCancel }: Props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div id="join-form">
-        <input
-          id="text-input"
-          placeholder="Enter Game ID"
-          type="text"
-          value={idInput}
-          onChange={({ target }) => setIdInput(target.value)}
-        />
-        <div id="form-buttons">
-          <button
-            className="button"
-            id="cancel-button"
-            type="button"
-            onClick={onCancel}
-          >
-            Cancel
-          </button>
-          <button className="button" id="join-button" type="submit">
-            Join
-          </button>
-        </div>
-      </div>
-    </form>
+    <Form onSubmit={handleSubmit}>
+      <TextInput
+        placeholder="Enter Game ID"
+        type="text"
+        value={idInput}
+        onChange={({ target }) => setIdInput(target.value)}
+      />
+      <FormButtons>
+        <CancelButton type="button" onClick={onCancel}>
+          Cancel
+        </CancelButton>
+        <JoinButton type="submit">Join</JoinButton>
+      </FormButtons>
+    </Form>
   );
 };
 

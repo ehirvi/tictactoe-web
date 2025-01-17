@@ -1,9 +1,26 @@
 import { useState } from "react";
-import "../styles/components/Button.css";
-import "../styles/views/HomeScreen.css";
 import gameService from "../services/gameService";
 import JoinForm from "../components/JoinForm";
 import useGameSessionStore from "../store/useGameSessionStore";
+import MenuButton from "../components/MenuButton";
+import styled from "styled-components";
+
+const StyledHomeScreen = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  font-family: monospace;
+`;
+
+const NewGameButton = styled(MenuButton)`
+  background-color: rgb(126, 216, 117);
+
+  &:hover {
+    background-color: rgb(65, 116, 60);
+  }
+`;
 
 const HomeScreen = () => {
   const setSessionStarted = useGameSessionStore(
@@ -27,27 +44,15 @@ const HomeScreen = () => {
   };
 
   return (
-    <div id="home-screen">
+    <StyledHomeScreen>
       <h1>Tic-Tac-Toe</h1>
-      <button
-        className="button"
-        id="new-game-button"
-        onClick={handleNewGameButton}
-      >
-        New Game
-      </button>
+      <NewGameButton onClick={handleNewGameButton}>New Game</NewGameButton>
       {isJoinFormOpen ? (
         <JoinForm onCancel={handleJoinForm} />
       ) : (
-        <button
-          className="button"
-          id="new-game-button"
-          onClick={handleJoinForm}
-        >
-          Join Game
-        </button>
+        <NewGameButton onClick={handleJoinForm}>Join Game</NewGameButton>
       )}
-    </div>
+    </StyledHomeScreen>
   );
 };
 
