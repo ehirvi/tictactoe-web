@@ -10,9 +10,9 @@ Play a game of Tic-Tac-Toe with your friend remotely. Create a new game, send th
 
 > UI is a work in progress
 
-<img width=400 src="https://github.com/user-attachments/assets/501c7f4f-1399-4f00-88fa-56d63df7d74f"></img>
-<img width=400 src="https://github.com/user-attachments/assets/5041da39-5801-4481-9d19-fc5d7b3a61c3"></img>
-<img width=400 src="https://github.com/user-attachments/assets/294480cc-3355-4fa7-a4db-04075d0f8f0e"></img>
+<img width=400 src="https://github.com/user-attachments/assets/981e3104-3dae-480e-a50d-f44c10ca173c"></img>
+<img width=400 src="https://github.com/user-attachments/assets/29df3be6-59d7-48ad-958a-a3beaa9aa3e1"></img>
+<img width=400 src="https://github.com/user-attachments/assets/82a4ed08-8dcd-4f31-8d7c-704a9b71cb7c"></img>
 
 ## Technologies Used
 
