@@ -16,4 +16,9 @@ export interface PlayerJoinEvent {
   role: PlayerRole;
 }
 
+export interface GameOverEvent {
+  type: "GameOver";
+  message: string;
+}
+
 export type ClientEvent = GameBoardUpdateEvent | PlayerJoinEvent;

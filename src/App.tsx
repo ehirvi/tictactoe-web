@@ -1,9 +1,9 @@
-import useGameSessionStore from "./store/useGameSessionStore";
+import useGameStore from "./store/gameStore";
 import GameScreen from "./views/GameScreen";
 import HomeScreen from "./views/HomeScreen";
 
 const App = () => {
-  const sessionStarted = useGameSessionStore((state) => state.sessionStarted);
+  const sessionStarted = useGameStore((state) => state.sessionStarted);
 
   return <>{sessionStarted ? <GameScreen /> : <HomeScreen />}</>;
 };

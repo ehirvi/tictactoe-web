@@ -1,6 +1,6 @@
 import { useState } from "react";
 import gameService from "../services/gameService";
-import useGameSessionStore from "../store/useGameSessionStore";
+import useGameStore from "../store/gameStore";
 import styled from "styled-components";
 import MenuButton from "./MenuButton";
 
@@ -43,8 +43,8 @@ interface Props {
 }
 
 const JoinForm = ({ onCancel }: Props) => {
-  const setSessionId = useGameSessionStore((state) => state.setSessionId);
-  const setSessionStarted = useGameSessionStore(
+  const setSessionId = useGameStore((state) => state.setSessionId);
+  const setSessionStarted = useGameStore(
     (state) => state.setSessionStarted
   );
   const [idInput, setIdInput] = useState("");

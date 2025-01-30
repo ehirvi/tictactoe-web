@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import { GameBoard } from "../utils/types";
 import Square from "./Square";
+import useGameStore from "../store/gameStore";
 
 const StyledGrid = styled.div`
   display: flex;
+  align-items: center;
   flex-direction: column;
   gap: 5px;
 `;
@@ -14,14 +16,21 @@ const StyledRow = styled.div`
   gap: 5px;
 `;
 
+const InfoText = styled.p`
+  font-size: 18px;
+  font-weight: bold;
+`;
+
 interface Props {
   board: GameBoard;
   makeMove: (position: number) => void;
 }
 
 const Grid = ({ board, makeMove }: Props) => {
+  const gameOverMessage = useGameStore((state) => state.gameOverMessage);
   return (
     <StyledGrid>
+      <InfoText>{gameOverMessage}</InfoText>
       <StyledRow>
         <Square value={board[0]} position={0} makeMove={makeMove} />
         <Square value={board[1]} position={1} makeMove={makeMove} />

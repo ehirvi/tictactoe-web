@@ -6,13 +6,14 @@ import {
   PlayerJoinEvent,
 } from "../utils/types";
 import webSocket from "../services/webSocket";
-import useGameSessionStore from "../store/useGameSessionStore";
+import useGameStore from "../store/gameStore";
 
 /**
  * Handles the connection to the game server and returns an up to date game board and a function to make a move
  */
 const useGameServer = () => {
-  const sessionId = useGameSessionStore((state) => state.sessionId);
+  const sessionId = useGameStore((state) => state.sessionId);
+  const setGameOverMessage = useGameStore((state) => state.setGameOverMessage);
   const [socket, setSocket] = useState<WebSocket>();
   const [playerId, setPlayerId] = useState<string>();
   const [playerRole, setPlayerRole] = useState<PlayerJoinEvent["role"]>();
@@ -42,6 +43,9 @@ const useGameServer = () => {
           case "PlayerJoin":
             setPlayerId(gameEvent.player_id);
             setPlayerRole(gameEvent.role);
+            break;
+          case "GameOver":
+            setGameOverMessage(gameEvent.message);
             break;
           default: {
             const _exhaustiveCheck: never = gameEvent;

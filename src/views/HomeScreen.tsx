@@ -1,7 +1,7 @@
 import { useState } from "react";
 import gameService from "../services/gameService";
 import JoinForm from "../components/JoinForm";
-import useGameSessionStore from "../store/useGameSessionStore";
+import useGameStore from "../store/gameStore";
 import MenuButton from "../components/MenuButton";
 import styled from "styled-components";
 
@@ -23,10 +23,10 @@ const NewGameButton = styled(MenuButton)`
 `;
 
 const HomeScreen = () => {
-  const setSessionStarted = useGameSessionStore(
+  const setSessionStarted = useGameStore(
     (state) => state.setSessionStarted
   );
-  const setSessionId = useGameSessionStore((state) => state.setSessionId);
+  const setSessionId = useGameStore((state) => state.setSessionId);
   const [isJoinFormOpen, setJoinFormOpen] = useState(false);
 
   const startSession = async () => {

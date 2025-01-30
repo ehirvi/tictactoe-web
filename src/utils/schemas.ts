@@ -20,7 +20,13 @@ const playerJoinEventSchema = z.object({
   role: playerRoleSchema,
 });
 
+const gameOverEvent = z.object({
+  type: z.literal("GameOver"),
+  message: z.string(),
+});
+
 export const gameEventSchema = z.union([
   gameBoardUpdateEventSchema,
   playerJoinEventSchema,
+  gameOverEvent,
 ]);
