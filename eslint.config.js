@@ -6,7 +6,7 @@ import tseslint from "typescript-eslint";
 import react from "eslint-plugin-react";
 
 export default tseslint.config(
-  { ignores: ["dist"] },
+  { ignores: ["dist", "e2e-tests", "playwright.config.ts"] },
   {
     settings: { react: { version: "18.3" } },
     extends: [
