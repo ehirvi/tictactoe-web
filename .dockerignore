@@ -1,0 +1,9 @@
+node_modules
+e2e-tests
+playwright-report
+test-results
+dist
+Dockerfile
+.dockerignore
+.git
+.gitignore
