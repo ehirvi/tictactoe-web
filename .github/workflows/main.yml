@@ -20,6 +20,10 @@ jobs:
         run: |
           cd frontend
           npm ci
+      - name: Install Playwright browsers
+        run: |
+          cd frontend
+          npx playwright install --with-deps
       - name: Lint frontend codebase
         run: |
           cd frontend
@@ -28,10 +32,6 @@ jobs:
         run: |
           cd frontend
           npm run build
-      - name: Install Playwright browsers
-        run: |
-          cd frontend
-          npx playwright install --with-deps
       - name: Checkout backend
         uses: actions/checkout@v4
         with:
@@ -50,7 +50,7 @@ jobs:
           cd backend
           npm run start &
       - name: Wait until backend is running
-        run: npx wait-on http://localhost:3000
+        run: npx wait-on http://localhost:3000/ping
       - name: Run End-to-End Playwright tests
         run: |
           cd frontend
