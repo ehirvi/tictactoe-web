@@ -34,17 +34,10 @@ Play a game of Tic-Tac-Toe with your friend remotely. Create a new game, send th
 2. Clone this repository and install its dependencies ```npm install```
 3. Run in development mode ```npm run dev```
 
-## Development Roadmap
+## Development Goals
 
-- [x] A basic user interface and a game board the player can interact with.
-- [x] The player can connect to the game server.
-- [x] Game server handles the players moves and sends an updated game board back to the player.
-- [x] A unique game ID is generated upon the first player starting a game session.
-- [x] A second player can join the game session of the first player using the game ID.
-- [x] Both players in the same session can set their mark (X or O) on the board with real time updates.
-- [x] Game win/lose conditions are checked on the server to determine if a player has won and whether the game should be ended.
-- [ ] Improved UI style.
-- [ ] Usage of Redis cache (or similar) to save ongoing game sessions, instead of using a map-like object.
-- [ ] Security/authorization via tokens.
-- [ ] Deployment of the application.
-- [ ] Ability to set a temporary nickname / register an account and save game progress to a database.
+- [ ] Deploy the application to fly.io.
+- [ ] Use Redis cache to save ongoing game sessions, instead of saving them to Node's memory.
+- [ ] Improve UI (better overall look, fancy animations, better error notifications).
+- [ ] Add security via tokens.
+- [ ] Add ability to register as a user and track game progress over time. Data saved to MongoDB/PostgreSQL.
