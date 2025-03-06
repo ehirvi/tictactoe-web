@@ -12,7 +12,7 @@ jobs:
   deployment_job:
     runs-on: ubuntu-22.04
     # To avoid running the workflow for documentation updates and other changes unrelated to code.
-    if: ${{ ! contains(join(toJson(github.event.commits.*.messages)), '#skip') }}
+    if: ${{ ! contains(join(toJson(github.event.commits.*.message)), '#skip') }}
     steps:
       - uses: actions/setup-node@v4
         with:
