@@ -1,16 +1,14 @@
 import axios from "axios";
-
-const API_URL = "http://localhost:3000/api/games";
-// const API_URL = "http://192.168.0.118:3000/api/games"
+import config from "../utils/config";
 
 const createSession = async () => {
-  const { data } = await axios.post<{ id: string }>(`${API_URL}/create`);
+  const { data } = await axios.post<{ id: string }>(`${config.API_URL}/create`);
   return data.id;
 };
 
 const joinSession = async (gameId: string) => {
   const { data } = await axios.post<{ successful: boolean }>(
-    `${API_URL}/join`,
+    `${config.API_URL}/join`,
     { id: gameId }
   );
   return data.successful;
