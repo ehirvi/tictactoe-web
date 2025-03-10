@@ -1,8 +1,7 @@
-const WEBSOCKET_URL = "ws://localhost:3000";
-// const WEBSOCKET_URL = "ws://192.168.0.118:3000";
+import config from "../utils/config";
 
 const createWebSocket = (gameId: string) => {
-  const socket = new WebSocket(`${WEBSOCKET_URL}/${gameId}`);
+  const socket = new WebSocket(`${config.WS_URL}/${gameId}`);
   return socket;
 };
 
