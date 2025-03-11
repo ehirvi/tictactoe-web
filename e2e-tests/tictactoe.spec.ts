@@ -10,7 +10,7 @@ test.describe("Basic functionality of the game", () => {
     await page.goto("/");
     await page.getByRole("button", { name: "New Game" }).click();
     await expect(
-      page.getByText("Use this code to invite a player")
+      page.getByText("Waiting for Player 2 to join...")
     ).toBeVisible();
   });
 
@@ -27,8 +27,6 @@ test.describe("Basic functionality of the game", () => {
     await textBox.click();
     await textBox.fill(gameId);
     await guestPage.getByRole("button", { name: "Join" }).click();
-    await expect(
-      guestPage.getByText("Use this code to invite a player")
-    ).toBeVisible();
+    await expect(guestPage.getByText("Opponent's turn!")).toBeVisible();
   });
 });

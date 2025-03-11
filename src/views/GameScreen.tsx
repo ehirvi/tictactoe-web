@@ -53,14 +53,13 @@ const CopyButton = styled.button`
 `;
 
 const GameScreen = () => {
-  const { board, sessionId, handlePlayerMove } = useGameServer();
+  const { board, sessionId, playerRole, handlePlayerMove } = useGameServer();
 
   if (board && sessionId) {
     const handleButton = () => {
       void copyToClipboard();
     };
 
-    // Clipboard API works only in secured HTTPS, can be tested in localhost
     const copyToClipboard = async () => {
       await navigator.clipboard.writeText(sessionId);
     };
@@ -68,11 +67,13 @@ const GameScreen = () => {
     return (
       <StyledGameScreen>
         <Grid board={board} makeMove={handlePlayerMove} />
-        <Clipboard>
-          <ClipboardText>Use this code to invite a player</ClipboardText>
-          <ClipboardBox type="text" readOnly value={sessionId}></ClipboardBox>
-          <CopyButton onClick={handleButton}>Copy to clipboard</CopyButton>
-        </Clipboard>
+        {playerRole === "Host" && (
+          <Clipboard>
+            <ClipboardText>Use this code to invite a player</ClipboardText>
+            <ClipboardBox type="text" readOnly value={sessionId}></ClipboardBox>
+            <CopyButton onClick={handleButton}>Copy to clipboard</CopyButton>
+          </Clipboard>
+        )}
       </StyledGameScreen>
     );
   }
