@@ -8,25 +8,31 @@ const gameBoardSchema = z
   .array(z.union([playerMarkSchema, z.null()]))
   .length(9);
 
-const gameBoardUpdateEventSchema = z.object({
-  type: z.literal("GameBoardUpdate"),
-  game_board: gameBoardSchema,
-  turn: playerRoleSchema,
-});
-
 const playerJoinEventSchema = z.object({
   type: z.literal("PlayerJoin"),
   player_id: z.string(),
   role: playerRoleSchema,
 });
 
-const gameOverEvent = z.object({
-  type: z.literal("GameOver"),
+const gameStartEventSchema = z.object({
+  type: z.literal("GameStart"),
+  all_players_joined: z.boolean()
+})
+
+const gameBoardUpdateEventSchema = z.object({
+  type: z.literal("GameBoardUpdate"),
+  game_board: gameBoardSchema,
+  turn: playerRoleSchema,
+});
+
+const gameStatusEventSchema = z.object({
+  type: z.literal("GameStatus"),
   message: z.string(),
 });
 
 export const gameEventSchema = z.union([
-  gameBoardUpdateEventSchema,
   playerJoinEventSchema,
-  gameOverEvent,
+  gameStartEventSchema,
+  gameBoardUpdateEventSchema,
+  gameStatusEventSchema,
 ]);

@@ -27,10 +27,10 @@ interface Props {
 }
 
 const Grid = ({ board, makeMove }: Props) => {
-  const gameOverMessage = useGameStore((state) => state.gameOverMessage);
+  const gameStatusMessage = useGameStore((state) => state.gameStatusMessage);
   return (
     <StyledGrid>
-      <InfoText>{gameOverMessage}</InfoText>
+      <InfoText>{gameStatusMessage}</InfoText>
       <StyledRow>
         <Square value={board[0]} position={0} makeMove={makeMove} />
         <Square value={board[1]} position={1} makeMove={makeMove} />
