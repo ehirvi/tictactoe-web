@@ -8,7 +8,12 @@ Play a game of Tic-Tac-Toe with your friend remotely. Create a new game, send th
 
 ## Preview
 
-> UI is a work in progress
+### Live Deployment
+https://tictactoe-web.fly.dev/
+
+### Screenshots
+
+> Note: Screenshots might be outdated
 
 <img width=400 src="https://github.com/user-attachments/assets/981e3104-3dae-480e-a50d-f44c10ca173c"></img>
 <img width=400 src="https://github.com/user-attachments/assets/29df3be6-59d7-48ad-958a-a3beaa9aa3e1"></img>
@@ -36,7 +41,7 @@ Play a game of Tic-Tac-Toe with your friend remotely. Create a new game, send th
 
 ## Development Goals
 
-- [ ] Deploy the application to fly.io.
+- [x] Deploy the application to fly.io.
 - [ ] Use Redis cache to save ongoing game sessions, instead of saving them to Node's memory.
 - [ ] Improve UI (better overall look, fancy animations, better error notifications).
 - [ ] Add security via tokens.
