@@ -1,11 +1,11 @@
 import { StateCreator } from "zustand";
 
 export interface ViewSlice {
-  gameOverMessage: string;
-  setGameOverMessage: (message: string) => void;
+  gameStatusMessage: string;
+  setGameStatusMessage: (message: string) => void;
 }
 
 export const createViewSlice: StateCreator<ViewSlice> = (set) => ({
-  gameOverMessage: "",
-  setGameOverMessage: (message: string) => set({ gameOverMessage: message }),
+  gameStatusMessage: "",
+  setGameStatusMessage: (message: string) => set({ gameStatusMessage: message }),
 });

@@ -13,12 +13,15 @@ import useGameStore from "../store/gameStore";
  */
 const useGameServer = () => {
   const sessionId = useGameStore((state) => state.sessionId);
-  const setGameOverMessage = useGameStore((state) => state.setGameOverMessage);
+  const setGameStatusMessage = useGameStore(
+    (state) => state.setGameStatusMessage
+  );
   const [socket, setSocket] = useState<WebSocket>();
   const [playerId, setPlayerId] = useState<string>();
   const [playerRole, setPlayerRole] = useState<PlayerJoinEvent["role"]>();
   const [gameTurn, setGameTurn] = useState<GameBoardUpdateEvent["turn"]>();
   const [board, setBoard] = useState<GameBoard>();
+  const [allPlayersJoined, setAllPlayersJoined] = useState<boolean>(false);
 
   useEffect(() => {
     if (sessionId) {
@@ -36,16 +39,19 @@ const useGameServer = () => {
       const gameEvent = parseMessage(message);
       if (gameEvent) {
         switch (gameEvent.type) {
-          case "GameBoardUpdate":
-            setBoard(gameEvent.game_board);
-            setGameTurn(gameEvent.turn);
-            break;
           case "PlayerJoin":
             setPlayerId(gameEvent.player_id);
             setPlayerRole(gameEvent.role);
             break;
-          case "GameOver":
-            setGameOverMessage(gameEvent.message);
+          case "GameStart":
+            setAllPlayersJoined(gameEvent.all_players_joined);
+            break;
+          case "GameBoardUpdate":
+            setBoard(gameEvent.game_board);
+            setGameTurn(gameEvent.turn);
+            break;
+          case "GameStatus":
+            setGameStatusMessage(gameEvent.message);
             break;
           default: {
             const _exhaustiveCheck: never = gameEvent;
@@ -57,7 +63,7 @@ const useGameServer = () => {
   }
 
   const handlePlayerMove = (position: number) => {
-    if (socket && playerRole === gameTurn) {
+    if (allPlayersJoined && socket && playerRole === gameTurn) {
       socket.send(
         JSON.stringify({
           type: "PlayerMove",
