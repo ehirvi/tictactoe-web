@@ -77,7 +77,7 @@ const useGameServer = () => {
     }
   };
 
-  return { board, sessionId, handlePlayerMove };
+  return { board, sessionId, playerRole, handlePlayerMove };
 };
 
 export default useGameServer;
