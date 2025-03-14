@@ -55,7 +55,7 @@ jobs:
       - name: Start backend proccess
         run: |
           cd backend
-          npm run start &
+          npm run start:test &
       - name: Wait until backend is running
         run: npx wait-on http://localhost:3000/ping
       - name: Run End-to-End Playwright tests
