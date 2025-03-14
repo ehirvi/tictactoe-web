@@ -43,10 +43,9 @@ interface Props {
 }
 
 const JoinForm = ({ onCancel }: Props) => {
-  const setSessionId = useGameStore((state) => state.setSessionId);
-  const setSessionStarted = useGameStore(
-    (state) => state.setSessionStarted
-  );
+  const setPlayerToken = useGameStore((state) => state.setPlayerToken);
+  const setPlayerRole = useGameStore((state) => state.setPlayerRole);
+  const setSessionStarted = useGameStore((state) => state.setSessionStarted);
   const [idInput, setIdInput] = useState("");
 
   const handleSubmit = (e: React.SyntheticEvent) => {
@@ -57,11 +56,10 @@ const JoinForm = ({ onCancel }: Props) => {
   };
 
   const joinGame = async () => {
-    const successful = await gameService.joinSession(idInput);
-    if (successful) {
-      setSessionId(idInput);
-      setSessionStarted(true);
-    }
+    const sessionData = await gameService.joinSession(idInput);
+    setPlayerToken(sessionData.token);
+    setPlayerRole(sessionData.role);
+    setSessionStarted(true);
   };
 
   return (
