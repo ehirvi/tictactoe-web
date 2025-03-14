@@ -23,15 +23,17 @@ const NewGameButton = styled(MenuButton)`
 `;
 
 const HomeScreen = () => {
-  const setSessionStarted = useGameStore(
-    (state) => state.setSessionStarted
-  );
+  const setSessionStarted = useGameStore((state) => state.setSessionStarted);
   const setSessionId = useGameStore((state) => state.setSessionId);
+  const setPlayerToken = useGameStore((state) => state.setPlayerToken);
+  const setPlayerRole = useGameStore(state => state.setPlayerRole)
   const [isJoinFormOpen, setJoinFormOpen] = useState(false);
 
   const startSession = async () => {
-    const id = await gameService.createSession();
-    setSessionId(id);
+    const sessionData = await gameService.createSession();
+    setPlayerToken(sessionData.token)
+    setPlayerRole(sessionData.role)
+    setSessionId(sessionData.game_id);
     setSessionStarted(true);
   };
 

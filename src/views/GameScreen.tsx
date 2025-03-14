@@ -55,28 +55,28 @@ const CopyButton = styled.button`
 const GameScreen = () => {
   const { board, sessionId, playerRole, handlePlayerMove } = useGameServer();
 
-  if (board && sessionId) {
-    const handleButton = () => {
-      void copyToClipboard();
-    };
+  const handleButton = () => {
+    void copyToClipboard();
+  };
 
-    const copyToClipboard = async () => {
+  const copyToClipboard = async () => {
+    if (sessionId) {
       await navigator.clipboard.writeText(sessionId);
-    };
+    }
+  };
 
-    return (
-      <StyledGameScreen>
-        <Grid board={board} makeMove={handlePlayerMove} />
-        {playerRole === "Host" && (
-          <Clipboard>
-            <ClipboardText>Use this code to invite a player</ClipboardText>
-            <ClipboardBox type="text" readOnly value={sessionId}></ClipboardBox>
-            <CopyButton onClick={handleButton}>Copy to clipboard</CopyButton>
-          </Clipboard>
-        )}
-      </StyledGameScreen>
-    );
-  }
+  return (
+    <StyledGameScreen>
+      {board && <Grid board={board} makeMove={handlePlayerMove} />}
+      {sessionId && playerRole === "Host" && (
+        <Clipboard>
+          <ClipboardText>Use this code to invite a player</ClipboardText>
+          <ClipboardBox type="text" readOnly value={sessionId}></ClipboardBox>
+          <CopyButton onClick={handleButton}>Copy to clipboard</CopyButton>
+        </Clipboard>
+      )}
+    </StyledGameScreen>
+  );
 };
 
 export default GameScreen;
