@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
 import { parseMessage } from "../utils/parsers";
-import {
-  GameBoard,
-  GameBoardUpdateEvent,
-  PlayerJoinEvent,
-} from "../utils/types";
+import { GameBoard, GameBoardUpdateEvent } from "../utils/types";
 import webSocket from "../services/webSocket";
 import useGameStore from "../store/gameStore";
 
@@ -12,26 +8,26 @@ import useGameStore from "../store/gameStore";
  * Handles the connection to the game server and returns an up to date game board and a function to make a move
  */
 const useGameServer = () => {
+  const playerToken = useGameStore((state) => state.playerToken);
+  const playerRole = useGameStore((state) => state.playerRole);
   const sessionId = useGameStore((state) => state.sessionId);
   const setGameStatusMessage = useGameStore(
     (state) => state.setGameStatusMessage
   );
   const [socket, setSocket] = useState<WebSocket>();
-  const [playerId, setPlayerId] = useState<string>();
-  const [playerRole, setPlayerRole] = useState<PlayerJoinEvent["role"]>();
   const [gameTurn, setGameTurn] = useState<GameBoardUpdateEvent["turn"]>();
   const [board, setBoard] = useState<GameBoard>();
   const [allPlayersJoined, setAllPlayersJoined] = useState<boolean>(false);
 
   useEffect(() => {
-    if (sessionId) {
-      const ws = webSocket.createWebSocket(sessionId);
+    if (playerToken) {
+      const ws = webSocket.createWebSocket(playerToken);
       setSocket(ws);
       return () => {
         ws.close();
       };
     }
-  }, [sessionId]);
+  }, [playerToken]);
 
   if (socket) {
     socket.addEventListener("message", (ev: MessageEvent<string>) => {
@@ -39,10 +35,6 @@ const useGameServer = () => {
       const gameEvent = parseMessage(message);
       if (gameEvent) {
         switch (gameEvent.type) {
-          case "PlayerJoin":
-            setPlayerId(gameEvent.player_id);
-            setPlayerRole(gameEvent.role);
-            break;
           case "GameStart":
             setAllPlayersJoined(gameEvent.all_players_joined);
             break;
@@ -63,14 +55,10 @@ const useGameServer = () => {
   }
 
   const handlePlayerMove = (position: number) => {
-    if (allPlayersJoined && socket && playerRole === gameTurn) {
+    if (allPlayersJoined && socket?.readyState === socket!.OPEN && playerRole === gameTurn) {
       socket.send(
         JSON.stringify({
           type: "PlayerMove",
-          game_id: sessionId,
-          player: {
-            id: playerId,
-          },
           position,
         })
       );
