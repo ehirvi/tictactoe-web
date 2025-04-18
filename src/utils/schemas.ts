@@ -8,10 +8,17 @@ const gameBoardSchema = z
   .array(z.union([playerMarkSchema, z.null()]))
   .length(9);
 
+export const sessionCacheSchema = z.object({
+  sessionStarted: z.boolean(),
+  sessionId: z.string(),
+  playerToken: z.string(),
+  playerRole: playerRoleSchema,
+});
+
 const gameStartEventSchema = z.object({
   type: z.literal("GameStart"),
-  all_players_joined: z.boolean()
-})
+  all_players_joined: z.boolean(),
+});
 
 const gameBoardUpdateEventSchema = z.object({
   type: z.literal("GameBoardUpdate"),
