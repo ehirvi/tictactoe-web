@@ -4,6 +4,7 @@ import JoinForm from "../components/JoinForm";
 import useGameStore from "../store/gameStore";
 import MenuButton from "../components/MenuButton";
 import styled from "styled-components";
+import { SessionCache } from "../utils/types";
 
 const StyledHomeScreen = styled.div`
   display: flex;
@@ -26,13 +27,22 @@ const HomeScreen = () => {
   const setSessionStarted = useGameStore((state) => state.setSessionStarted);
   const setSessionId = useGameStore((state) => state.setSessionId);
   const setPlayerToken = useGameStore((state) => state.setPlayerToken);
-  const setPlayerRole = useGameStore(state => state.setPlayerRole)
+  const setPlayerRole = useGameStore((state) => state.setPlayerRole);
   const [isJoinFormOpen, setJoinFormOpen] = useState(false);
 
   const startSession = async () => {
     const sessionData = await gameService.createSession();
-    setPlayerToken(sessionData.token)
-    setPlayerRole(sessionData.role)
+    const sessionCache: SessionCache = {
+      playerToken: sessionData.token,
+      playerRole: sessionData.role,
+      sessionId: sessionData.game_id,
+      sessionStarted: true,
+    };
+    const value = JSON.stringify(sessionCache);
+    sessionStorage.setItem("gameSessionCache", value);
+
+    setPlayerToken(sessionData.token);
+    setPlayerRole(sessionData.role);
     setSessionId(sessionData.game_id);
     setSessionStarted(true);
   };

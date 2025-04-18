@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { parseMessage } from "../utils/parsers";
 import { GameBoard, GameBoardUpdateEvent } from "../utils/types";
 import webSocket from "../services/webSocket";
@@ -14,49 +14,67 @@ const useGameServer = () => {
   const setGameStatusMessage = useGameStore(
     (state) => state.setGameStatusMessage
   );
-  const [socket, setSocket] = useState<WebSocket>();
+  const socketRef = useRef<WebSocket>();
   const [gameTurn, setGameTurn] = useState<GameBoardUpdateEvent["turn"]>();
   const [board, setBoard] = useState<GameBoard>();
   const [allPlayersJoined, setAllPlayersJoined] = useState<boolean>(false);
 
   useEffect(() => {
-    if (playerToken) {
-      const ws = webSocket.createWebSocket(playerToken);
-      setSocket(ws);
-      return () => {
-        ws.close();
-      };
-    }
-  }, [playerToken]);
-
-  if (socket) {
-    socket.addEventListener("message", (ev: MessageEvent<string>) => {
-      const message: unknown = JSON.parse(ev.data);
-      const gameEvent = parseMessage(message);
-      if (gameEvent) {
-        switch (gameEvent.type) {
-          case "GameStart":
-            setAllPlayersJoined(gameEvent.all_players_joined);
-            break;
-          case "GameBoardUpdate":
-            setBoard(gameEvent.game_board);
-            setGameTurn(gameEvent.turn);
-            break;
-          case "GameStatus":
-            setGameStatusMessage(gameEvent.message);
-            break;
-          default: {
-            const _exhaustiveCheck: never = gameEvent;
-            return _exhaustiveCheck;
+    const connectToServer = () => {
+      const ws = webSocket.createWebSocket(playerToken!);
+      ws.addEventListener("message", (ev: MessageEvent<string>) => {
+        const message: unknown = JSON.parse(ev.data);
+        const gameEvent = parseMessage(message);
+        if (gameEvent) {
+          switch (gameEvent.type) {
+            case "GameStart":
+              setAllPlayersJoined(gameEvent.all_players_joined);
+              break;
+            case "GameBoardUpdate":
+              setBoard(gameEvent.game_board);
+              setGameTurn(gameEvent.turn);
+              break;
+            case "GameStatus":
+              setGameStatusMessage(gameEvent.message);
+              break;
+            default: {
+              const _exhaustiveCheck: never = gameEvent;
+              return _exhaustiveCheck;
+            }
           }
         }
-      }
-    });
-  }
+      });
+      ws.addEventListener("close", (ev: CloseEvent) => {
+        const condition =
+          socketRef.current?.readyState === socketRef.current?.CLOSED &&
+          !ev.wasClean;
+        if (condition) {
+          connectToServer();
+        } else {
+          clearBrowserSessionCache();
+        }
+      });
+      socketRef.current = ws;
+    };
+    if (!socketRef.current) {
+      connectToServer();
+    }
+    return () => {
+      socketRef.current?.close();
+    };
+  }, [playerToken, setGameStatusMessage]);
+
+  const clearBrowserSessionCache = () => {
+    sessionStorage.removeItem("gameSessionCache");
+  };
 
   const handlePlayerMove = (position: number) => {
-    if (allPlayersJoined && socket?.readyState === socket!.OPEN && playerRole === gameTurn) {
-      socket.send(
+    const playerConnected =
+      socketRef.current &&
+      socketRef.current.readyState === socketRef.current.OPEN;
+    const playerCanMove = allPlayersJoined && playerRole === gameTurn;
+    if (playerConnected && playerCanMove) {
+      socketRef.current!.send(
         JSON.stringify({
           type: "PlayerMove",
           position,

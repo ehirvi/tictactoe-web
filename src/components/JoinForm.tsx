@@ -3,6 +3,7 @@ import gameService from "../services/gameService";
 import useGameStore from "../store/gameStore";
 import styled from "styled-components";
 import MenuButton from "./MenuButton";
+import { SessionCache } from "../utils/types";
 
 const Form = styled.form`
   display: flex;
@@ -57,6 +58,15 @@ const JoinForm = ({ onCancel }: Props) => {
 
   const joinGame = async () => {
     const sessionData = await gameService.joinSession(idInput);
+    const sessionCache: SessionCache = {
+      playerToken: sessionData.token,
+      playerRole: sessionData.role,
+      sessionId: idInput,
+      sessionStarted: true,
+    };
+    const value = JSON.stringify(sessionCache);
+    sessionStorage.setItem("gameSessionCache", value);
+
     setPlayerToken(sessionData.token);
     setPlayerRole(sessionData.role);
     setSessionStarted(true);
