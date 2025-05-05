@@ -14,13 +14,18 @@ const App = () => {
   useEffect(() => {
     const storageValue = sessionStorage.getItem("gameSessionCache");
     if (storageValue) {
-      const data: unknown = JSON.parse(storageValue);
-      const sessionCache = parseCache(data);
-      if (sessionCache) {
-        setPlayerToken(sessionCache.playerToken);
-        setPlayerRole(sessionCache.playerRole);
-        setSessionId(sessionCache.sessionId);
-        setSessionStarted(sessionCache.sessionStarted);
+      try {
+        const data: unknown = JSON.parse(storageValue);
+        const sessionCache = parseCache(data);
+        if (sessionCache) {
+          setPlayerToken(sessionCache.playerToken);
+          setPlayerRole(sessionCache.playerRole);
+          setSessionId(sessionCache.sessionId);
+          setSessionStarted(sessionCache.sessionStarted);
+        }
+      } catch {
+        console.log('-- Warning: Invalid token format --');
+        sessionStorage.removeItem("gameSessionCache");
       }
     }
   }, [setPlayerRole, setPlayerToken, setSessionId, setSessionStarted]);

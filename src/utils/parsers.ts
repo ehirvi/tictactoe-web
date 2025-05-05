@@ -10,10 +10,6 @@ export const parseMessage = (data: unknown) => {
 };
 
 export const parseCache = (data: unknown) => {
-  try {
-    const sessionCache = sessionCacheSchema.parse(data);
-    return sessionCache;
-  } catch (error: unknown) {
-    console.error(error);
-  }
+  const sessionCache = sessionCacheSchema.parse(data);
+  return sessionCache;
 };
