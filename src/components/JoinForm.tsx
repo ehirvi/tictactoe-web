@@ -14,7 +14,7 @@ const TextInput = styled.input`
   border: solid 2px;
   outline: solid 2px;
   padding: 10px;
-  font-family: monospace;
+  font-family: ${(props) => props.theme.fontFamily.primary};
   font-size: 20px;
 `;
 

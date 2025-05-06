@@ -11,10 +11,10 @@ const StyledSquare = styled.button`
   border: solid 2px black;
   outline: solid 1px black;
   font-size: 45px;
-  font-family: monospace;
+  font-family: ${(props) => props.theme.fontFamily.primary};
   background-color: #60c473;
   color: white;
-  cursor: pointer;
+  box-shadow: 2px 2px 2px 0 purple, 3px 3px 3px 0 black;
 
   &:hover {
     transition: 0.2s;

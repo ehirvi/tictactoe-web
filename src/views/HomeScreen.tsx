@@ -12,7 +12,7 @@ const StyledHomeScreen = styled.div`
   justify-content: center;
   align-items: center;
   margin: 20px;
-  font-family: monospace;
+  font-family: ${(props) => props.theme.fontFamily.primary};
 `;
 
 const NewGameButton = styled(MenuButton)`
