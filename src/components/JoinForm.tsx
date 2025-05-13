@@ -12,9 +12,9 @@ const Form = styled.form`
 
 const TextInput = styled.input`
   border: solid 2px;
-  outline: solid 2px;
+  outline: solid 1px;
   padding: 10px;
-  font-family: monospace;
+  font-family: ${(props) => props.theme.fontFamily.primary};
   font-size: 20px;
 `;
 
@@ -24,18 +24,18 @@ const FormButtons = styled.div`
 `;
 
 const CancelButton = styled(MenuButton)`
-  background-color: rgb(221, 101, 101);
+  background-color: ${(props) => props.theme.color.button.red};
 
   &:hover {
-    background-color: rgb(129, 58, 58);
+    background-color: ${(props) => props.theme.color.button.redHover};
   }
 `;
 
 const JoinButton = styled(MenuButton)`
-  background-color: rgb(126, 216, 117);
+  background-color: ${(props) => props.theme.color.button.green};
 
   &:hover {
-    background-color: rgb(65, 116, 60);
+    background-color: ${(props) => props.theme.color.button.greenHover};
   }
 `;
 

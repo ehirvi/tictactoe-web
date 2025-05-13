@@ -31,8 +31,8 @@ const useGameServer = () => {
               setAllPlayersJoined(gameEvent.all_players_joined);
               break;
             case "GameBoardUpdate":
-              setBoard(gameEvent.game_board);
               setGameTurn(gameEvent.turn);
+              setBoard(gameEvent.game_board);
               break;
             case "GameStatus":
               setGameStatusMessage(gameEvent.message);

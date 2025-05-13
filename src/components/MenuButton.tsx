@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 const MenuButton = styled.button`
-  border: solid black 4px;
-  font-family: monospace;
+  border: 4px solid black;
+  font-family: ${props => props.theme.fontFamily.primary};
   font-size: 30px;
   font-weight: normal;
   color: black;
@@ -11,8 +11,7 @@ const MenuButton = styled.button`
   padding-right: 15px;
   padding-top: 2px;
   padding-bottom: 2px;
-  cursor: pointer;
-  box-shadow: 2px 2px 2px 0 purple, 3px 3px 3px 0 black;
+  box-shadow: 0px 0px 5px 3px purple;
 
   &:hover {
     transition: 0.2s;

@@ -7,7 +7,8 @@ const StyledGameScreen = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  font-family: monospace;
+  font-family: ${(props) => props.theme.fontFamily.primary};
+  color: white;
   gap: 40px;
 `;
 
@@ -28,13 +29,13 @@ const ClipboardBox = styled.input`
   border: solid 1px;
   outline: solid 1px;
   padding: 5px;
-  font-family: monospace;
+  font-family: ${(props) => props.theme.fontFamily.primary};
   font-size: 15px;
 `;
 
 const CopyButton = styled.button`
-  border: solid black 3px;
-  font-family: monospace;
+  border: 4px solid black;
+  font-family: ${(props) => props.theme.fontFamily.primary};
   font-size: 20px;
   font-weight: normal;
   color: black;
@@ -42,12 +43,11 @@ const CopyButton = styled.button`
   padding-right: 15px;
   padding-top: 2px;
   padding-bottom: 2px;
-  cursor: pointer;
-  box-shadow: 1px 1px 1px 0 purple, 2px 2px 2px 0 black;
-  background-color: lightskyblue;
+  box-shadow: 0px 0px 5px 3px purple;
+  background-color: ${(props) => props.theme.color.button.blue};
 
   &:hover {
-    background-color: rgb(77, 126, 156);
+    background-color: ${(props) => props.theme.color.button.blueHover};
     transition: 0.2s;
   }
 `;

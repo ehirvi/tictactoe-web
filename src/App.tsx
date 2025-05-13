@@ -3,6 +3,8 @@ import useGameStore from "./store/gameStore";
 import GameScreen from "./views/GameScreen";
 import HomeScreen from "./views/HomeScreen";
 import { parseCache } from "./utils/parsers";
+import { ThemeProvider } from "styled-components";
+import { appTheme } from "./utils/themes";
 
 const App = () => {
   const sessionStarted = useGameStore((state) => state.sessionStarted);
@@ -24,13 +26,17 @@ const App = () => {
           setSessionStarted(sessionCache.sessionStarted);
         }
       } catch {
-        console.log('-- Warning: Invalid token format --');
+        console.log("-- Warning: Invalid token format --");
         sessionStorage.removeItem("gameSessionCache");
       }
     }
   }, [setPlayerRole, setPlayerToken, setSessionId, setSessionStarted]);
 
-  return <>{sessionStarted ? <GameScreen /> : <HomeScreen />}</>;
+  return (
+    <ThemeProvider theme={appTheme}>
+      {sessionStarted ? <GameScreen /> : <HomeScreen />}
+    </ThemeProvider>
+  );
 };
 
 export default App;
