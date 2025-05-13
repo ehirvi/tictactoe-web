@@ -13,13 +13,14 @@ const StyledHomeScreen = styled.div`
   align-items: center;
   margin: 20px;
   font-family: ${(props) => props.theme.fontFamily.primary};
+  color: white;
 `;
 
 const NewGameButton = styled(MenuButton)`
-  background-color: rgb(126, 216, 117);
+  background-color: ${(props) => props.theme.color.button.green};
 
   &:hover {
-    background-color: rgb(65, 116, 60);
+    background-color: ${(props) => props.theme.color.button.greenHover};
   }
 `;
 

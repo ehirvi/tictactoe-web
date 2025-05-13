@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { PlayerMark } from "../utils/types";
 import useGameStore from "../store/gameStore";
 
@@ -9,17 +9,16 @@ const StyledSquare = styled.button<{ $playerColor: string }>`
   width: 90px;
   height: 90px;
   padding: 10px;
-  border: solid 2px black;
-  outline: solid 1px black;
+  border: none;
   font-size: 45px;
   font-family: ${(props) => props.theme.fontFamily.primary};
-  background-color: #60c473;
+  background-color: black;
   color: ${(props) => props.$playerColor};
-  box-shadow: 2px 2px 2px 0 purple, 3px 3px 3px 0 black;
 
   &:hover {
     transition: 0.2s;
-    background-color: #356e3f;
+    background-color: ${(props) => props.theme.color.button.blue};
+    color: black;
   }
 `;
 
@@ -31,12 +30,13 @@ interface Props {
 
 const Square = ({ value, position, makeMove }: Props) => {
   const playerRole = useGameStore((state) => state.playerRole);
+  const theme = useTheme();
 
   const playerColor =
-       (playerRole !== "Host" && value !== "X") ||
-        (playerRole !== "Guest" && value !== "O")
-        ? "blue"
-        : "red"
+    (playerRole !== "Host" && value !== "X") ||
+    (playerRole !== "Guest" && value !== "O")
+      ? theme.color.button.blue
+      : theme.color.button.red;
 
   const handleClick = () => {
     if (!value) {

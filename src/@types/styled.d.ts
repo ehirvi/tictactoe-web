@@ -6,5 +6,15 @@ declare module "styled-components" {
       primary: string;
       secondary: string;
     };
+    color: {
+      button: {
+        green: string;
+        greenHover: string;
+        red: string;
+        redHover: string;
+        blue: string;
+        blueHover: string;
+      };
+    };
   }
 }
