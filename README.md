@@ -4,7 +4,7 @@ An online version of the Tic-Tac-Toe game.
 
 ## Description
 
-Play a game of Tic-Tac-Toe with your friend remotely. Create a new game, send the invite code to your friend and they will use it to join your game session.
+Play a game of Tic-Tac-Toe against your friend online. Create a new game, send the invite code to your friend and they will use it to join your game session.
 
 ## Preview
 
@@ -13,11 +13,11 @@ https://tictactoe-web.fly.dev/
 
 ### Screenshots
 
-> Note: Screenshots might be outdated
-
-<img width=400 src="https://github.com/user-attachments/assets/981e3104-3dae-480e-a50d-f44c10ca173c"></img>
-<img width=400 src="https://github.com/user-attachments/assets/29df3be6-59d7-48ad-958a-a3beaa9aa3e1"></img>
-<img width=400 src="https://github.com/user-attachments/assets/82a4ed08-8dcd-4f31-8d7c-704a9b71cb7c"></img>
+<img width=300 src="https://github.com/user-attachments/assets/cd4e8007-2dc0-40a9-a132-f5d3ce2ae97b"></img>
+<img width=300 src="https://github.com/user-attachments/assets/ab001e82-a48f-4896-8bef-13ce195088ac"></img>
+<img width=300 src="https://github.com/user-attachments/assets/6924733a-532a-47d1-bc9a-763a00d1cdcd"></img>
+<img width=300 src="https://github.com/user-attachments/assets/25194dd4-7909-4a36-8dbb-e6ca0d6b788e"></img>
+<img width=300 src="https://github.com/user-attachments/assets/d85c83fa-6365-4b19-a511-ec12ec80ca7f"></img>
 
 ## Technologies Used
 
@@ -42,7 +42,7 @@ https://tictactoe-web.fly.dev/
 ## Development Goals
 
 - [x] Deploy the application to fly.io.
-- [ ] Use Redis cache to save ongoing game sessions, instead of saving them to Node's memory.
+- [x] Add security via tokens.
 - [ ] Improve UI (better overall look, fancy animations, better error notifications).
-- [ ] Add security via tokens.
+- [ ] Use Redis cache to save ongoing game sessions, instead of saving them to Node's memory.
 - [ ] Add ability to register as a user and track game progress over time. Data saved to MongoDB/PostgreSQL.
