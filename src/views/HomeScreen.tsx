@@ -19,8 +19,15 @@ const StyledHomeScreen = styled.div`
 const NewGameButton = styled(MenuButton)`
   background-color: ${(props) => props.theme.color.button.green};
 
-  &:hover {
-    background-color: ${(props) => props.theme.color.button.greenHover};
+  @media (hover: hover) {
+    &:hover {
+      background-color: ${(props) => props.theme.color.button.greenHover};
+    }
+  }
+  @media (hover: none) {
+    &:active {
+      background-color: ${(props) => props.theme.color.button.greenHover};
+    }
   }
 `;
 

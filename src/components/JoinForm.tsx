@@ -26,16 +26,30 @@ const FormButtons = styled.div`
 const CancelButton = styled(MenuButton)`
   background-color: ${(props) => props.theme.color.button.red};
 
-  &:hover {
-    background-color: ${(props) => props.theme.color.button.redHover};
+  @media (hover: hover) {
+    &:hover {
+      background-color: ${(props) => props.theme.color.button.redHover};
+    }
+  }
+  @media (hover: none) {
+    &:active {
+      background-color: ${(props) => props.theme.color.button.redHover};
+    }
   }
 `;
 
 const JoinButton = styled(MenuButton)`
   background-color: ${(props) => props.theme.color.button.green};
 
-  &:hover {
-    background-color: ${(props) => props.theme.color.button.greenHover};
+  @media (hover: hover) {
+    &:hover {
+      background-color: ${(props) => props.theme.color.button.greenHover};
+    }
+  }
+  @media (hover: none) {
+    &:active {
+      background-color: ${(props) => props.theme.color.button.greenHover};
+    }
   }
 `;
 

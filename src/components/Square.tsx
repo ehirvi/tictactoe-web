@@ -15,10 +15,19 @@ const StyledSquare = styled.button<{ $playerColor: string }>`
   background-color: black;
   color: ${(props) => props.$playerColor};
 
-  &:hover {
-    transition: 0.2s;
-    background-color: ${(props) => props.theme.color.button.blue};
-    color: black;
+  @media (hover: hover) {
+    &:hover {
+      transition: 0.2s;
+      background-color: ${(props) => props.theme.color.button.blue};
+      color: black;
+    }
+  }
+
+  @media (hover: none) {
+    &:active {
+      background-color: ${(props) => props.theme.color.button.blue};
+      color: black;
+    }
   }
 `;
 

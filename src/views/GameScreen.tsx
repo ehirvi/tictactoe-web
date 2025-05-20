@@ -46,9 +46,16 @@ const CopyButton = styled.button`
   box-shadow: 0px 0px 5px 3px purple;
   background-color: ${(props) => props.theme.color.button.blue};
 
-  &:hover {
-    background-color: ${(props) => props.theme.color.button.blueHover};
-    transition: 0.2s;
+  @media (hover: hover) {
+    &:hover {
+      background-color: ${(props) => props.theme.color.button.blueHover};
+      transition: 0.2s;
+    }
+  }
+  @media (hover: none) {
+    &:active {
+      background-color: ${(props) => props.theme.color.button.blueHover};
+    }
   }
 `;
 
