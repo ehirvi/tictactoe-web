@@ -34,22 +34,31 @@ const ClipboardBox = styled.input`
 `;
 
 const CopyButton = styled.button`
-  border: 4px solid black;
+  border: none;
+  border-radius: 10px;
   font-family: ${(props) => props.theme.fontFamily.primary};
   font-size: 20px;
   font-weight: normal;
   color: black;
   padding-left: 15px;
   padding-right: 15px;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  box-shadow: 0px 0px 5px 3px purple;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-right: 6px solid ${(props) => props.theme.color.button.blueShadow};
+  border-bottom: 6px solid ${(props) => props.theme.color.button.blueShadow};
+  box-shadow: 2px 2px 0px 2px white;
   background-color: ${(props) => props.theme.color.button.blue};
+
+  &:active {
+    border-right: none;
+    border-bottom: none;
+    border-left: 6px solid white;
+    border-top: 6px solid white;
+  }
 
   @media (hover: hover) {
     &:hover {
       background-color: ${(props) => props.theme.color.button.blueHover};
-      transition: 0.2s;
     }
   }
   @media (hover: none) {

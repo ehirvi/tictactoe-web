@@ -9,10 +9,13 @@ declare module "styled-components" {
     color: {
       button: {
         green: string;
+        greenShadow: string;
         greenHover: string;
         red: string;
+        redShadow: string;
         redHover: string;
         blue: string;
+        blueShadow: string;
         blueHover: string;
       };
     };
