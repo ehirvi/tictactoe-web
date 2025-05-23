@@ -1,4 +1,5 @@
 import Grid from "../components/Grid";
+import MenuButton from "../components/MenuButton";
 import useGameServer from "../hooks/useGameServer";
 import styled from "styled-components";
 
@@ -14,7 +15,7 @@ const StyledGameScreen = styled.div`
 
 const Clipboard = styled.div`
   display: flex;
-  // align-items: center;
+  /* align-items: center; */
   flex-direction: column;
   gap: 10px;
 `;
@@ -33,28 +34,13 @@ const ClipboardBox = styled.input`
   font-size: 15px;
 `;
 
-const CopyButton = styled.button`
-  border: none;
-  border-radius: 10px;
-  font-family: ${(props) => props.theme.fontFamily.primary};
+const CopyButton = styled(MenuButton)`
+  margin: 0;
   font-size: 20px;
-  font-weight: normal;
-  color: black;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  background-color: ${(props) => props.theme.color.button.blue};
   border-right: 6px solid ${(props) => props.theme.color.button.blueShadow};
   border-bottom: 6px solid ${(props) => props.theme.color.button.blueShadow};
   box-shadow: 2px 2px 0px 2px white;
-  background-color: ${(props) => props.theme.color.button.blue};
-
-  &:active {
-    border-right: none;
-    border-bottom: none;
-    border-left: 6px solid white;
-    border-top: 6px solid white;
-  }
 
   @media (hover: hover) {
     &:hover {
