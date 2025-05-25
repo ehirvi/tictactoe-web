@@ -10,7 +10,7 @@ test.describe("Basic functionality of the game", () => {
     await page.goto("/");
     await page.getByRole("button", { name: "New Game" }).click();
     await expect(
-      page.getByText("Waiting for opponent to join...")
+      page.getByText("Waiting for opponent to join")
     ).toBeVisible();
   });
 
