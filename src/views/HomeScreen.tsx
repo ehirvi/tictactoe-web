@@ -18,9 +18,19 @@ const StyledHomeScreen = styled.div`
 
 const NewGameButton = styled(MenuButton)`
   background-color: ${(props) => props.theme.color.button.green};
+  border-right: 6px solid ${(props) => props.theme.color.button.greenShadow};
+  border-bottom: 6px solid ${(props) => props.theme.color.button.greenShadow};
+  box-shadow: 2px 2px 0px 2px white;
 
-  &:hover {
-    background-color: ${(props) => props.theme.color.button.greenHover};
+  @media (hover: hover) {
+    &:hover {
+      background-color: ${(props) => props.theme.color.button.greenHover};
+    }
+  }
+  @media (hover: none) {
+    &:active {
+      background-color: ${(props) => props.theme.color.button.greenHover};
+    }
   }
 `;
 

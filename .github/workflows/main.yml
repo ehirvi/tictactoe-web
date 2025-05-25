@@ -41,6 +41,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: ehirvi/tictactoe-server
+          ref: misc/status-change
           path: backend
       - name: Install backend dependencies
         run: |

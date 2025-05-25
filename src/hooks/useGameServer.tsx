@@ -11,13 +11,14 @@ const useGameServer = () => {
   const playerToken = useGameStore((state) => state.playerToken);
   const playerRole = useGameStore((state) => state.playerRole);
   const sessionId = useGameStore((state) => state.sessionId);
+  const playersJoined = useGameStore((state) => state.playersJoined);
+  const setPlayersJoined = useGameStore((state) => state.setPlayersJoined);
   const setGameStatusMessage = useGameStore(
     (state) => state.setGameStatusMessage
   );
   const socketRef = useRef<WebSocket>();
   const [gameTurn, setGameTurn] = useState<GameBoardUpdateEvent["turn"]>();
   const [board, setBoard] = useState<GameBoard>();
-  const [allPlayersJoined, setAllPlayersJoined] = useState<boolean>(false);
 
   useEffect(() => {
     const connectToServer = () => {
@@ -28,7 +29,7 @@ const useGameServer = () => {
         if (gameEvent) {
           switch (gameEvent.type) {
             case "GameStart":
-              setAllPlayersJoined(gameEvent.all_players_joined);
+              setPlayersJoined(gameEvent.all_players_joined);
               break;
             case "GameBoardUpdate":
               setGameTurn(gameEvent.turn);
@@ -62,7 +63,7 @@ const useGameServer = () => {
     return () => {
       socketRef.current?.close();
     };
-  }, [playerToken, setGameStatusMessage]);
+  }, [playerToken, setGameStatusMessage, setPlayersJoined]);
 
   const clearBrowserSessionCache = () => {
     sessionStorage.removeItem("gameSessionCache");
@@ -72,7 +73,7 @@ const useGameServer = () => {
     const playerConnected =
       socketRef.current &&
       socketRef.current.readyState === socketRef.current.OPEN;
-    const playerCanMove = allPlayersJoined && playerRole === gameTurn;
+    const playerCanMove = playersJoined && playerRole === gameTurn;
     if (playerConnected && playerCanMove) {
       socketRef.current!.send(
         JSON.stringify({

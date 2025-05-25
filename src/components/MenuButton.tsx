@@ -1,21 +1,24 @@
 import styled from "styled-components";
 
 const MenuButton = styled.button`
-  border: 4px solid black;
-  font-family: ${props => props.theme.fontFamily.primary};
+  border: none;
+  border-radius: 10px;
+  font-family: ${(props) => props.theme.fontFamily.primary};
   font-size: 30px;
   font-weight: normal;
   color: black;
   margin: 20px;
   padding-left: 15px;
   padding-right: 15px;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  box-shadow: 0px 0px 5px 3px purple;
+  padding-top: 5px;
+  padding-bottom: 5px;
 
-  &:hover {
-    transition: 0.2s;
+  &:active {
+    border-right: none;
+    border-bottom: none;
+    border-left: 6px solid white;
+    border-top: 6px solid white;
   }
 `;
 
-export default MenuButton
+export default MenuButton;

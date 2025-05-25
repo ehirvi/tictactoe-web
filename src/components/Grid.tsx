@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { GameBoard } from "../utils/types";
 import Square from "./Square";
 import useGameStore from "../store/gameStore";
@@ -23,9 +23,41 @@ const StyledRow = styled.div`
   gap: 5px;
 `;
 
-const InfoText = styled.p`
+const StatusContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const StatusText = styled.p`
   font-size: 18px;
   font-weight: bold;
+`;
+
+const dotAnimation = keyframes`
+  0% {
+    content: "";
+  }
+  25% {
+    content: ".";
+  }
+  50% {
+    content: "..";
+  }
+  75% {
+    content: "...";
+  }
+  100% {
+    content: "";
+  }
+`;
+
+const AnimatedDots = styled.p`
+  &::after {
+    font-size: 18px;
+    font-weight: bold;
+    content: "";
+    animation: ${dotAnimation} 2s steps(4) infinite;
+  }
 `;
 
 interface Props {
@@ -35,9 +67,14 @@ interface Props {
 
 const Grid = ({ board, makeMove }: Props) => {
   const gameStatusMessage = useGameStore((state) => state.gameStatusMessage);
+  const playersJoined = useGameStore((state) => state.playersJoined);
+
   return (
     <StyledContainer>
-      <InfoText>{gameStatusMessage}</InfoText>
+      <StatusContainer>
+        <StatusText>{gameStatusMessage}</StatusText>
+        {playersJoined === false && <AnimatedDots />}
+      </StatusContainer>
       <StyledGrid>
         <StyledRow>
           <Square value={board[0]} position={0} makeMove={makeMove} />

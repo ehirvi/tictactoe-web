@@ -1,4 +1,5 @@
 import Grid from "../components/Grid";
+import MenuButton from "../components/MenuButton";
 import useGameServer from "../hooks/useGameServer";
 import styled from "styled-components";
 
@@ -14,7 +15,7 @@ const StyledGameScreen = styled.div`
 
 const Clipboard = styled.div`
   display: flex;
-  // align-items: center;
+  /* align-items: center; */
   flex-direction: column;
   gap: 10px;
 `;
@@ -33,22 +34,23 @@ const ClipboardBox = styled.input`
   font-size: 15px;
 `;
 
-const CopyButton = styled.button`
-  border: 4px solid black;
-  font-family: ${(props) => props.theme.fontFamily.primary};
+const CopyButton = styled(MenuButton)`
+  margin: 0;
   font-size: 20px;
-  font-weight: normal;
-  color: black;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  box-shadow: 0px 0px 5px 3px purple;
   background-color: ${(props) => props.theme.color.button.blue};
+  border-right: 6px solid ${(props) => props.theme.color.button.blueShadow};
+  border-bottom: 6px solid ${(props) => props.theme.color.button.blueShadow};
+  box-shadow: 2px 2px 0px 2px white;
 
-  &:hover {
-    background-color: ${(props) => props.theme.color.button.blueHover};
-    transition: 0.2s;
+  @media (hover: hover) {
+    &:hover {
+      background-color: ${(props) => props.theme.color.button.blueHover};
+    }
+  }
+  @media (hover: none) {
+    &:active {
+      background-color: ${(props) => props.theme.color.button.blueHover};
+    }
   }
 `;
 
