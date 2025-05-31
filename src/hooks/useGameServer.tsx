@@ -11,7 +11,7 @@ import { clearGameCache } from "../utils/sessionStorage";
 const useGameServer = () => {
   const playerToken = useGameStore((state) => state.playerToken);
   const playerRole = useGameStore((state) => state.playerRole);
-  const sessionId = useGameStore((state) => state.sessionId);
+  const gameId = useGameStore((state) => state.gameId);
   const playersJoined = useGameStore((state) => state.playersJoined);
   const setPlayersJoined = useGameStore((state) => state.setPlayersJoined);
   const setGameStatusMessage = useGameStore(
@@ -81,7 +81,7 @@ const useGameServer = () => {
     }
   };
 
-  return { board, sessionId, playerRole, handlePlayerMove };
+  return { board, gameId, playerRole, handlePlayerMove };
 };
 
 export default useGameServer;

@@ -1,22 +1,22 @@
 import { StateCreator } from "zustand";
 
 export interface SessionSlice {
-  sessionStarted: boolean;
-  sessionId: string | undefined;
+  gameStarted: boolean;
+  gameId: string | undefined;
   playersJoined: boolean;
-  setSessionStarted: (status: boolean) => void;
-  setSessionId: (id: string) => void;
+  setGameStarted: (status: boolean) => void;
+  setGameId: (id: string) => void;
   setPlayersJoined: (status: boolean) => void;
   resetSessionData: () => void;
 }
 
 export const createSessionSlice: StateCreator<SessionSlice> = (set) => ({
-  sessionStarted: false,
-  sessionId: undefined,
+  gameStarted: false,
+  gameId: undefined,
   playersJoined: false,
-  setSessionStarted: (status: boolean) => set({ sessionStarted: status }),
-  setSessionId: (id: string) => set({ sessionId: id }),
+  setGameStarted: (status: boolean) => set({ gameStarted: status }),
+  setGameId: (id: string) => set({ gameId: id }),
   setPlayersJoined: (status: boolean) => set({ playersJoined: status }),
   resetSessionData: () =>
-    set({ sessionId: undefined, sessionStarted: false, playersJoined: false }),
+    set({ gameId: undefined, gameStarted: false, playersJoined: false }),
 });

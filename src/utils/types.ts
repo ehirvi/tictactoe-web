@@ -4,20 +4,20 @@ export type PlayerRole = "Host" | "Guest";
 
 export type GameBoard = (PlayerMark | null)[];
 
-export interface SessionCache {
-  sessionStarted: boolean;
-  sessionId: string;
+export interface GameCache {
+  gameStarted: boolean;
+  gameId: string;
   playerToken: string;
   playerRole: PlayerRole;
 }
 
-export interface CreateSessionResponse {
+export interface CreateGameResponse {
   token: string;
   game_id: string;
   role: PlayerRole;
 }
 
-export interface JoinSessionResponse {
+export interface JoinGameResponse {
   token: string;
   role: PlayerRole;
 }

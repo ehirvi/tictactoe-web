@@ -1,20 +1,16 @@
-import {
-  CreateSessionResponse,
-  JoinSessionResponse,
-  SessionCache,
-} from "./types";
+import { CreateGameResponse, GameCache, JoinGameResponse } from "./types";
 
 export const saveGameCache = (
-  sessionData: Omit<CreateSessionResponse, "game_id"> | JoinSessionResponse,
+  sessionData: Omit<CreateGameResponse, "game_id"> | JoinGameResponse,
   gameId: string
 ) => {
-  const sessionCache: SessionCache = {
+  const gameCache: GameCache = {
     playerToken: sessionData.token,
     playerRole: sessionData.role,
-    sessionId: gameId,
-    sessionStarted: true,
+    gameId,
+    gameStarted: true,
   };
-  const value = JSON.stringify(sessionCache);
+  const value = JSON.stringify(gameCache);
   sessionStorage.setItem("gameSessionCache", value);
 };
 

@@ -36,21 +36,21 @@ const NewGameButton = styled(MenuButton)`
 const HomeScreen = () => {
   const setPlayerToken = useGameStore((state) => state.setPlayerToken);
   const setPlayerRole = useGameStore((state) => state.setPlayerRole);
-  const setSessionId = useGameStore((state) => state.setSessionId);
-  const setSessionStarted = useGameStore((state) => state.setSessionStarted);
+  const setGameId = useGameStore((state) => state.setGameId);
+  const setGameStarted = useGameStore((state) => state.setGameStarted);
   const [isJoinFormOpen, setJoinFormOpen] = useState(false);
 
-  const startSession = async () => {
-    const sessionData = await gameService.createSession();
+  const startGame = async () => {
+    const sessionData = await gameService.createGameSession();
     saveGameCache(sessionData, sessionData.game_id);
     setPlayerToken(sessionData.token);
     setPlayerRole(sessionData.role);
-    setSessionId(sessionData.game_id);
-    setSessionStarted(true);
+    setGameId(sessionData.game_id);
+    setGameStarted(true);
   };
 
   const handleNewGameButton = () => {
-    void startSession();
+    void startGame();
   };
 
   const handleJoinForm = () => {

@@ -76,18 +76,18 @@ const HomeButton = styled(GameButton)`
 `;
 
 const GameScreen = () => {
-  const { board, sessionId, playerRole, handlePlayerMove } = useGameServer();
+  const { board, gameId, playerRole, handlePlayerMove } = useGameServer();
   const resetSessionData = useGameStore((store) => store.resetSessionData);
   const resetPlayerData = useGameStore((store) => store.resetPlayerData);
-  const playerIsHost = sessionId !== undefined && playerRole === "Host";
+  const playerIsHost = gameId !== undefined && playerRole === "Host";
 
   const handleButton = () => {
     void copyToClipboard();
   };
 
   const copyToClipboard = async () => {
-    if (sessionId) {
-      await navigator.clipboard.writeText(sessionId);
+    if (gameId) {
+      await navigator.clipboard.writeText(gameId);
     }
   };
 
@@ -103,7 +103,7 @@ const GameScreen = () => {
       {playerIsHost && (
         <Clipboard>
           <ClipboardText>Use this code to invite a player</ClipboardText>
-          <ClipboardBox type="text" readOnly value={sessionId}></ClipboardBox>
+          <ClipboardBox type="text" readOnly value={gameId}></ClipboardBox>
           <CopyButton onClick={handleButton}>Copy to clipboard</CopyButton>
         </Clipboard>
       )}
