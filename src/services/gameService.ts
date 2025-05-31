@@ -1,20 +1,20 @@
 import axios from "axios";
 import config from "../utils/config";
-import { CreateSessionResponse, JoinSessionResponse } from "../utils/types";
+import { CreateGameResponse, JoinGameResponse } from "../utils/types";
 
-const createSession = async () => {
-  const { data } = await axios.post<CreateSessionResponse>(
+const createGameSession = async () => {
+  const { data } = await axios.post<CreateGameResponse>(
     `${config.API_URL}/create`
   );
   return data;
 };
 
-const joinSession = async (gameId: string) => {
-  const { data } = await axios.post<JoinSessionResponse>(
+const joinGameSession = async (gameId: string) => {
+  const { data } = await axios.post<JoinGameResponse>(
     `${config.API_URL}/join`,
     { id: gameId }
   );
   return data;
 };
 
-export default { createSession, joinSession };
+export default { createGameSession, joinGameSession };

@@ -1,4 +1,4 @@
-import { gameEventSchema, sessionCacheSchema } from "./schemas";
+import { gameEventSchema, gameCacheSchema } from "./schemas";
 
 export const parseMessage = (data: unknown) => {
   try {
@@ -10,6 +10,6 @@ export const parseMessage = (data: unknown) => {
 };
 
 export const parseCache = (data: unknown) => {
-  const sessionCache = sessionCacheSchema.parse(data);
-  return sessionCache;
+  const gameCache = gameCacheSchema.parse(data);
+  return gameCache;
 };

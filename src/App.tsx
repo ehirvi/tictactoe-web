@@ -7,9 +7,9 @@ import { ThemeProvider } from "styled-components";
 import { appTheme } from "./utils/themes";
 
 const App = () => {
-  const sessionStarted = useGameStore((state) => state.sessionStarted);
-  const setSessionStarted = useGameStore((state) => state.setSessionStarted);
-  const setSessionId = useGameStore((state) => state.setSessionId);
+  const gameStarted = useGameStore((state) => state.gameStarted);
+  const setGameStarted = useGameStore((state) => state.setGameStarted);
+  const setGameId = useGameStore((state) => state.setGameId);
   const setPlayerToken = useGameStore((state) => state.setPlayerToken);
   const setPlayerRole = useGameStore((state) => state.setPlayerRole);
 
@@ -18,23 +18,23 @@ const App = () => {
     if (storageValue) {
       try {
         const data: unknown = JSON.parse(storageValue);
-        const sessionCache = parseCache(data);
-        if (sessionCache) {
-          setPlayerToken(sessionCache.playerToken);
-          setPlayerRole(sessionCache.playerRole);
-          setSessionId(sessionCache.sessionId);
-          setSessionStarted(sessionCache.sessionStarted);
+        const gameCache = parseCache(data);
+        if (gameCache) {
+          setPlayerToken(gameCache.playerToken);
+          setPlayerRole(gameCache.playerRole);
+          setGameId(gameCache.gameId);
+          setGameStarted(gameCache.gameStarted);
         }
       } catch {
         console.log("-- Warning: Invalid token format --");
         sessionStorage.removeItem("gameSessionCache");
       }
     }
-  }, [setPlayerRole, setPlayerToken, setSessionId, setSessionStarted]);
+  }, [setGameId, setGameStarted, setPlayerRole, setPlayerToken]);
 
   return (
     <ThemeProvider theme={appTheme}>
-      {sessionStarted ? <GameScreen /> : <HomeScreen />}
+      {gameStarted ? <GameScreen /> : <HomeScreen />}
     </ThemeProvider>
   );
 };

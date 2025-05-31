@@ -1,7 +1,10 @@
+import { CrossIcon } from "../assets";
+import GameButton from "../components/GameButton";
 import Grid from "../components/Grid";
-import MenuButton from "../components/MenuButton";
 import useGameServer from "../hooks/useGameServer";
 import styled from "styled-components";
+import { clearGameCache } from "../utils/sessionStorage";
+import useGameStore from "../store/gameStore";
 
 const StyledGameScreen = styled.div`
   display: flex;
@@ -34,13 +37,10 @@ const ClipboardBox = styled.input`
   font-size: 15px;
 `;
 
-const CopyButton = styled(MenuButton)`
-  margin: 0;
-  font-size: 20px;
+const CopyButton = styled(GameButton)`
   background-color: ${(props) => props.theme.color.button.blue};
   border-right: 6px solid ${(props) => props.theme.color.button.blueShadow};
   border-bottom: 6px solid ${(props) => props.theme.color.button.blueShadow};
-  box-shadow: 2px 2px 0px 2px white;
 
   @media (hover: hover) {
     &:hover {
@@ -54,29 +54,60 @@ const CopyButton = styled(MenuButton)`
   }
 `;
 
+const HomeButton = styled(GameButton)`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: ${(props) => props.theme.color.button.red};
+  border-right: 6px solid ${(props) => props.theme.color.button.redShadow};
+  border-bottom: 6px solid ${(props) => props.theme.color.button.redShadow};
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: ${(props) => props.theme.color.button.redHover};
+    }
+  }
+
+  @media (hover: none) {
+    &:active {
+      background-color: ${(props) => props.theme.color.button.redHover};
+    }
+  }
+`;
+
 const GameScreen = () => {
-  const { board, sessionId, playerRole, handlePlayerMove } = useGameServer();
+  const { board, gameId, playerRole, handlePlayerMove } = useGameServer();
+  const resetSessionData = useGameStore((store) => store.resetSessionData);
+  const resetPlayerData = useGameStore((store) => store.resetPlayerData);
+  const playerIsHost = gameId !== undefined && playerRole === "Host";
 
   const handleButton = () => {
     void copyToClipboard();
   };
 
   const copyToClipboard = async () => {
-    if (sessionId) {
-      await navigator.clipboard.writeText(sessionId);
+    if (gameId) {
+      await navigator.clipboard.writeText(gameId);
     }
+  };
+
+  const exitGame = () => {
+    clearGameCache();
+    resetSessionData();
+    resetPlayerData();
   };
 
   return (
     <StyledGameScreen>
       {board && <Grid board={board} makeMove={handlePlayerMove} />}
-      {sessionId && playerRole === "Host" && (
+      {playerIsHost && (
         <Clipboard>
           <ClipboardText>Use this code to invite a player</ClipboardText>
-          <ClipboardBox type="text" readOnly value={sessionId}></ClipboardBox>
+          <ClipboardBox type="text" readOnly value={gameId}></ClipboardBox>
           <CopyButton onClick={handleButton}>Copy to clipboard</CopyButton>
         </Clipboard>
       )}
+      <HomeButton onClick={exitGame}>{<CrossIcon />}Exit game</HomeButton>
     </StyledGameScreen>
   );
 };

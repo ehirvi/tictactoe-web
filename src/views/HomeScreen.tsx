@@ -4,7 +4,7 @@ import JoinForm from "../components/JoinForm";
 import useGameStore from "../store/gameStore";
 import MenuButton from "../components/MenuButton";
 import styled from "styled-components";
-import { SessionCache } from "../utils/types";
+import { saveGameCache } from "../utils/sessionStorage";
 
 const StyledHomeScreen = styled.div`
   display: flex;
@@ -20,7 +20,6 @@ const NewGameButton = styled(MenuButton)`
   background-color: ${(props) => props.theme.color.button.green};
   border-right: 6px solid ${(props) => props.theme.color.button.greenShadow};
   border-bottom: 6px solid ${(props) => props.theme.color.button.greenShadow};
-  box-shadow: 2px 2px 0px 2px white;
 
   @media (hover: hover) {
     &:hover {
@@ -35,31 +34,23 @@ const NewGameButton = styled(MenuButton)`
 `;
 
 const HomeScreen = () => {
-  const setSessionStarted = useGameStore((state) => state.setSessionStarted);
-  const setSessionId = useGameStore((state) => state.setSessionId);
   const setPlayerToken = useGameStore((state) => state.setPlayerToken);
   const setPlayerRole = useGameStore((state) => state.setPlayerRole);
+  const setGameId = useGameStore((state) => state.setGameId);
+  const setGameStarted = useGameStore((state) => state.setGameStarted);
   const [isJoinFormOpen, setJoinFormOpen] = useState(false);
 
-  const startSession = async () => {
-    const sessionData = await gameService.createSession();
-    const sessionCache: SessionCache = {
-      playerToken: sessionData.token,
-      playerRole: sessionData.role,
-      sessionId: sessionData.game_id,
-      sessionStarted: true,
-    };
-    const value = JSON.stringify(sessionCache);
-    sessionStorage.setItem("gameSessionCache", value);
-
+  const startGame = async () => {
+    const sessionData = await gameService.createGameSession();
+    saveGameCache(sessionData, sessionData.game_id);
     setPlayerToken(sessionData.token);
     setPlayerRole(sessionData.role);
-    setSessionId(sessionData.game_id);
-    setSessionStarted(true);
+    setGameId(sessionData.game_id);
+    setGameStarted(true);
   };
 
   const handleNewGameButton = () => {
-    void startSession();
+    void startGame();
   };
 
   const handleJoinForm = () => {

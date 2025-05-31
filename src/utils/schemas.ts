@@ -8,9 +8,9 @@ const gameBoardSchema = z
   .array(z.union([playerMarkSchema, z.null()]))
   .length(9);
 
-export const sessionCacheSchema = z.object({
-  sessionStarted: z.boolean(),
-  sessionId: z.string(),
+export const gameCacheSchema = z.object({
+  gameStarted: z.boolean(),
+  gameId: z.string(),
   playerToken: z.string(),
   playerRole: playerRoleSchema,
 });
