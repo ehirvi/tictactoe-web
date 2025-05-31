@@ -12,6 +12,7 @@ const MenuButton = styled.button`
   padding-right: 15px;
   padding-top: 5px;
   padding-bottom: 5px;
+  box-shadow: 2px 2px 0px 2px white;
 
   &:active {
     border-right: none;

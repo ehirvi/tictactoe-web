@@ -3,6 +3,7 @@ import { parseMessage } from "../utils/parsers";
 import { GameBoard, GameBoardUpdateEvent } from "../utils/types";
 import webSocket from "../services/webSocket";
 import useGameStore from "../store/gameStore";
+import { clearGameCache } from "../utils/sessionStorage";
 
 /**
  * Handles the connection to the game server and returns an up to date game board and a function to make a move
@@ -52,7 +53,7 @@ const useGameServer = () => {
         if (condition) {
           connectToServer();
         } else {
-          clearBrowserSessionCache();
+          clearGameCache();
         }
       });
       socketRef.current = ws;
@@ -64,10 +65,6 @@ const useGameServer = () => {
       socketRef.current?.close();
     };
   }, [playerToken, setGameStatusMessage, setPlayersJoined]);
-
-  const clearBrowserSessionCache = () => {
-    sessionStorage.removeItem("gameSessionCache");
-  };
 
   const handlePlayerMove = (position: number) => {
     const playerConnected =

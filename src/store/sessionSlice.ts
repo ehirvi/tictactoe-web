@@ -7,6 +7,7 @@ export interface SessionSlice {
   setSessionStarted: (status: boolean) => void;
   setSessionId: (id: string) => void;
   setPlayersJoined: (status: boolean) => void;
+  resetSessionData: () => void;
 }
 
 export const createSessionSlice: StateCreator<SessionSlice> = (set) => ({
@@ -16,4 +17,6 @@ export const createSessionSlice: StateCreator<SessionSlice> = (set) => ({
   setSessionStarted: (status: boolean) => set({ sessionStarted: status }),
   setSessionId: (id: string) => set({ sessionId: id }),
   setPlayersJoined: (status: boolean) => set({ playersJoined: status }),
+  resetSessionData: () =>
+    set({ sessionId: undefined, sessionStarted: false, playersJoined: false }),
 });

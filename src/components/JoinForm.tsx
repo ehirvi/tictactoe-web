@@ -3,7 +3,7 @@ import gameService from "../services/gameService";
 import useGameStore from "../store/gameStore";
 import styled from "styled-components";
 import MenuButton from "./MenuButton";
-import { SessionCache } from "../utils/types";
+import { saveGameCache } from "../utils/sessionStorage";
 
 const Form = styled.form`
   display: flex;
@@ -27,7 +27,6 @@ const CancelButton = styled(MenuButton)`
   background-color: ${(props) => props.theme.color.button.red};
   border-right: 6px solid ${(props) => props.theme.color.button.redShadow};
   border-bottom: 6px solid ${(props) => props.theme.color.button.redShadow};
-  box-shadow: 2px 2px 0px 2px white;
 
   @media (hover: hover) {
     &:hover {
@@ -45,7 +44,6 @@ const JoinButton = styled(MenuButton)`
   background-color: ${(props) => props.theme.color.button.green};
   border-right: 6px solid ${(props) => props.theme.color.button.greenShadow};
   border-bottom: 6px solid ${(props) => props.theme.color.button.greenShadow};
-  box-shadow: 2px 2px 0px 2px white;
 
   @media (hover: hover) {
     &:hover {
@@ -76,15 +74,7 @@ const JoinForm = ({ onCancel }: Props) => {
 
   const joinGame = async () => {
     const sessionData = await gameService.joinSession(idInput);
-    const sessionCache: SessionCache = {
-      playerToken: sessionData.token,
-      playerRole: sessionData.role,
-      sessionId: idInput,
-      sessionStarted: true,
-    };
-    const value = JSON.stringify(sessionCache);
-    sessionStorage.setItem("gameSessionCache", value);
-
+    saveGameCache(sessionData, idInput);
     setPlayerToken(sessionData.token);
     setPlayerRole(sessionData.role);
     setSessionStarted(true);
