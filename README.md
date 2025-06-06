@@ -31,13 +31,14 @@ https://tictactoe-web.fly.dev/
 
 ### Requirements
 
-- [Node.js](https://nodejs.org/en)
+- [nvm](https://github.com/nvm-sh/nvm)
 
 ### Installation
 
-1. Follow the instructions to run the [server](https://github.com/ehirvi/tictactoe-server) first
-2. Clone this repository and install its dependencies ```npm install```
-3. Run in development mode ```npm run dev```
+1. Install the [server](https://github.com/ehirvi/tictactoe-server) first
+2. Install correct Node version in the root ```nvm install``` 
+3. Install project dependencies ```npm install```
+4. Run in development mode ```npm run dev```
 
 ## Development Goals
 
